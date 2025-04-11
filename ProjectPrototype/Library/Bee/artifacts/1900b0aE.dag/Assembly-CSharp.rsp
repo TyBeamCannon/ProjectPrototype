@@ -432,6 +432,7 @@
 "Assets/Scripts/enemyAI.cs"
 "Assets/Scripts/IDamage.cs"
 "Assets/Scripts/playerController.cs"
+"Assets/Scripts/zeroG.cs"
 "Assets/Unity Store DL/Asteroids Pack/Assets/Scripts/RandomRotator.cs"
 -langversion:9.0
 /deterministic
