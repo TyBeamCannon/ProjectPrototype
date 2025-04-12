@@ -19,26 +19,22 @@ public class cameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // get input
+        // Get input
         float mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
 
-        rotX += mouseY;
-
-        if(invertY)
-        {
-            rotX = +mouseY;
-        }
+        if (invertY)
+            rotX += mouseY;
         else
-        {
             rotX -= mouseY;
-        }
 
-        // clamp the camera on the x-axis
+        // Clamp camera on the x-axis
         rotX = Mathf.Clamp(rotX, lockVertMin, lockVertMax);
-        //rotate the camera on the x-axis to look up and down
+
+        // Rotate the camera on the x-axis to look up and down
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
-        // rotate the player on the y-axis to look left and right
+
+        // Rotate the player on the y-axis to look left and right
         transform.parent.Rotate(Vector3.up * mouseX);
     }
 
