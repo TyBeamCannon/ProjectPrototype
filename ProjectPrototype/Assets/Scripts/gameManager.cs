@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuSettings;
 
     public bool isPaused;
 
@@ -17,6 +20,9 @@ public class gameManager : MonoBehaviour
 
     public GameObject player;
     public playerController playerScript;
+
+    [Header("---- Health ----")]
+    [SerializeField] Image healthBar;
 
     float timeScaleOrig;
 
@@ -30,6 +36,9 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
 
+        GameObject.FindWithTag("PostProcess").GetComponent<PostProcessVolume>().profile.GetSetting<Grain>().intensity.value = Camera.main.GetComponent<AudioSource>().volume = 0.01f;
+        
+
         timeScaleOrig = Time.timeScale;
     }
 
@@ -40,30 +49,33 @@ public class gameManager : MonoBehaviour
         {
             if (menuActive == null)
             {
-                StatePause();
-                menuActive = menuPause;
-                menuActive.SetActive(true);
+                StatePause(menuPause);
             }
             else if (menuActive == menuPause)
             {
                 StateUnpause();
             }
-
+            else if(menuActive == menuSettings)
+            {
+                SwapSettingsScreen();
+            }
 
         }
     }
 
-    public void StatePause()
+    public void StatePause(GameObject menuToActivate)
     {
-        isPaused = !isPaused;
+        isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        menuActive = menuToActivate;
+        menuActive.SetActive(true);
     }
 
     public void StateUnpause()
     {
-        isPaused = !isPaused;
+        isPaused = false;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -78,16 +90,30 @@ public class gameManager : MonoBehaviour
         if (gameGoalCount <= 0)
         {
             // You Won !
-            StatePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
+            StatePause(menuWin);
         }
     }
 
     public void YouLose()
     {
-        StatePause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
+        StatePause(menuLose);
+    }
+
+    public void SwapSettingsScreen()
+    {
+        if (menuActive == menuPause)
+        {
+            menuActive.SetActive(false);
+            menuActive = null;
+            menuActive = menuSettings;
+            menuActive.SetActive(true);
+        }
+        else if (menuActive == menuSettings)
+        {
+            menuActive.SetActive(false);
+            menuActive = null;
+            menuActive = menuPause;
+            menuActive.SetActive(true);
+        }
     }
 }

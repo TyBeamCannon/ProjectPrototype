@@ -433,6 +433,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/asteroidGeyser.cs"
+"Assets/Scripts/buttonFunctions.cs"
 "Assets/Scripts/cameraController.cs"
 "Assets/Scripts/damage.cs"
 "Assets/Scripts/enemyAI.cs"
@@ -440,6 +441,7 @@
 "Assets/Scripts/gameManager.cs"
 "Assets/Scripts/IDamage.cs"
 "Assets/Scripts/playerController.cs"
+"Assets/Scripts/settingFunctions.cs"
 "Assets/Scripts/zeroG.cs"
 "Assets/Unity Store DL/Asteroids Pack/Assets/Scripts/RandomRotator.cs"
 -langversion:9.0

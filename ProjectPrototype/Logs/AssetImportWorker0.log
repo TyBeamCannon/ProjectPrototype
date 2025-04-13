@@ -15,7 +15,7 @@ C:/Users/jeffi/Documents/GitHub/ProjectPrototype/ProjectPrototype
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-64977
+52704
 -job-worker-count
 5
 -background-job-worker-count
@@ -59,12 +59,12 @@ C:/Users/jeffi/Documents/GitHub/ProjectPrototype/ProjectPrototype
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [1004]  Target information:
+Player connection [20232]  Target information:
 
-Player connection [1004]  * "[IP] 192.168.1.71 [Port] 0 [Flags] 2 [Guid] 3633316453 [EditorId] 3633316453 [Version] 1048832 [Id] WindowsEditor(7,Jeffs-PC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [20232]  * "[IP] 192.168.1.71 [Port] 0 [Flags] 2 [Guid] 3703837255 [EditorId] 3703837255 [Version] 1048832 [Id] WindowsEditor(7,Jeffs-PC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [1004] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [1004] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [20232] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [20232] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 5
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -76,7 +76,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 2.78 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 2.25 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.45f1 (d91bd3d4e081)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/Resources/UnitySubsystems
@@ -92,43 +92,43 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56944
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56620
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.45f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003757 seconds.
-- Loaded All Assemblies, in  0.632 seconds
+Registered in 0.004605 seconds.
+- Loaded All Assemblies, in  0.543 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.506 seconds
-Domain Reload Profiling: 1136ms
-	BeginReloadAssembly (188ms)
+- Finished resetting the current domain, in  0.469 seconds
+Domain Reload Profiling: 1008ms
+	BeginReloadAssembly (183ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
 	RebuildCommonClasses (53ms)
-	RebuildNativeTypeToScriptingClass (19ms)
-	initialDomainReloadingComplete (69ms)
-	LoadAllAssembliesAndSetupDomain (300ms)
-		LoadAssemblies (182ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (72ms)
+	LoadAllAssembliesAndSetupDomain (214ms)
+		LoadAssemblies (178ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (295ms)
-			TypeCache.Refresh (293ms)
-				TypeCache.ScanAssembly (274ms)
+		AnalyzeDomain (211ms)
+			TypeCache.Refresh (209ms)
+				TypeCache.ScanAssembly (192ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (507ms)
+	FinalizeReload (469ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (432ms)
+		SetupLoadedEditorAssemblies (404ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (34ms)
-			SetLoadedEditorAssemblies (8ms)
-			BeforeProcessingInitializeOnLoad (69ms)
-			ProcessInitializeOnLoadAttributes (200ms)
-			ProcessInitializeOnLoadMethodAttributes (122ms)
+			InitializePlatformSupportModulesInManaged (25ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (70ms)
+			ProcessInitializeOnLoadAttributes (217ms)
+			ProcessInitializeOnLoadMethodAttributes (85ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -137,332 +137,56 @@ Domain Reload Profiling: 1136ms
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
-Symbol file data-00000261BE7402B0 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll
+Symbol file data-000001C8A10267D0 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll
 Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-00000262254BCF40 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll
+Symbol file data-000001C83C2AD290 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll
 Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-00000262229F9220 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Rider.Editor.dll
+Symbol file data-000001C8A1DBF220 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Rider.Editor.dll
 Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-0000026222AEA0D0 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Settings.Editor.dll
+Symbol file data-000001C8A0512900 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Settings.Editor.dll
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.331 seconds
-Refreshing native plugins compatible for Editor in 1.29 ms, found 3 plugins.
+- Loaded All Assemblies, in  1.123 seconds
+Refreshing native plugins compatible for Editor in 1.39 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.818 seconds
-Domain Reload Profiling: 2139ms
-	BeginReloadAssembly (313ms)
+- Finished resetting the current domain, in  0.917 seconds
+Domain Reload Profiling: 2029ms
+	BeginReloadAssembly (245ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (9ms)
+		DisableScriptedObjects (8ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (45ms)
-	RebuildCommonClasses (71ms)
+	RebuildCommonClasses (51ms)
 	RebuildNativeTypeToScriptingClass (18ms)
-	initialDomainReloadingComplete (58ms)
-	LoadAllAssembliesAndSetupDomain (861ms)
-		LoadAssemblies (602ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (743ms)
+		LoadAssemblies (520ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (462ms)
-			TypeCache.Refresh (358ms)
-				TypeCache.ScanAssembly (334ms)
-			BuildScriptInfoCaches (84ms)
+		AnalyzeDomain (369ms)
+			TypeCache.Refresh (273ms)
+				TypeCache.ScanAssembly (251ms)
+			BuildScriptInfoCaches (77ms)
 			ResolveRequiredComponents (14ms)
-	FinalizeReload (818ms)
+	FinalizeReload (917ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (677ms)
+		SetupLoadedEditorAssemblies (764ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (2ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (145ms)
-			ProcessInitializeOnLoadAttributes (452ms)
-			ProcessInitializeOnLoadMethodAttributes (65ms)
-			AfterProcessingInitializeOnLoad (8ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (168ms)
+			ProcessInitializeOnLoadAttributes (506ms)
+			ProcessInitializeOnLoadMethodAttributes (71ms)
+			AfterProcessingInitializeOnLoad (10ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (6ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.95 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.71 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 182 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6206 unused Assets / (8.4 MB). Loaded Objects now: 6777.
-Memory consumption went from 166.4 MB to 158.0 MB.
-Total: 13.848200 ms (FindLiveObjects: 0.999100 ms CreateObjectMapping: 0.363600 ms MarkObjects: 6.889500 ms  DeleteObjects: 5.594400 ms)
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file data-0000026223B22C20 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-00000262254BCF40 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-000002622329A180 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Rider.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-0000026233288010 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Settings.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.012 seconds
-Refreshing native plugins compatible for Editor in 1.25 ms, found 3 plugins.
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.868 seconds
-Domain Reload Profiling: 1875ms
-	BeginReloadAssembly (221ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (57ms)
-	RebuildCommonClasses (52ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (33ms)
-	LoadAllAssembliesAndSetupDomain (684ms)
-		LoadAssemblies (481ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (311ms)
-			TypeCache.Refresh (14ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (272ms)
-			ResolveRequiredComponents (21ms)
-	FinalizeReload (869ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (687ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (3ms)
-			BeforeProcessingInitializeOnLoad (145ms)
-			ProcessInitializeOnLoadAttributes (468ms)
-			ProcessInitializeOnLoadMethodAttributes (60ms)
-			AfterProcessingInitializeOnLoad (8ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 2.31 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 45 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6204 unused Assets / (8.0 MB). Loaded Objects now: 6780.
-Memory consumption went from 136.0 MB to 128.0 MB.
-Total: 13.922900 ms (FindLiveObjects: 1.349100 ms CreateObjectMapping: 1.507000 ms MarkObjects: 6.558000 ms  DeleteObjects: 4.507100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 82002.959718 seconds.
-  path: Assets/Scripts/asteroidGeyser.cs
-  artifactKey: Guid(615596cc345025e4fb0f572ce12ec719) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/asteroidGeyser.cs using Guid(615596cc345025e4fb0f572ce12ec719) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '262dcb218e2e3af1619767fae6ecc5e2') in 0.0154767 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 118.241172 seconds.
-  path: Assets/Unity Store DL/Steam VFX PAck
-  artifactKey: Guid(cc373cea2cbc11a4fbe2474bcb250a3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX PAck using Guid(cc373cea2cbc11a4fbe2474bcb250a3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd642ff3a149ae76830bbccc6e9cebd7a') in 0.0006408 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.318826 seconds.
-  path: Assets/Unity Store DL/Steam VFX Pack
-  artifactKey: Guid(cc373cea2cbc11a4fbe2474bcb250a3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX Pack using Guid(cc373cea2cbc11a4fbe2474bcb250a3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '271f2dabb38990b3aab8694cc8a1ff2e') in 0.0008322 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 10.878995 seconds.
-  path: Assets/Unity Store DL/Steam VFX Pack/VFX
-  artifactKey: Guid(75f593adf1084df44a674205593d3998) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX Pack/VFX using Guid(75f593adf1084df44a674205593d3998) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '55661fde642b84b9063850181f8f65b5') in 0.0007404 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.622565 seconds.
-  path: Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO
-  artifactKey: Guid(997ad6ebc8ac3f748af0e1e04fc507e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO using Guid(997ad6ebc8ac3f748af0e1e04fc507e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c4dc68bf4accff4235f101b0cdc16bdb') in 0.0007269 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.652038 seconds.
-  path: Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO/ReadMe Steam VFX DEMO.pdf
-  artifactKey: Guid(9ef8cf45222df1042aaf45e0084fabdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO/ReadMe Steam VFX DEMO.pdf using Guid(9ef8cf45222df1042aaf45e0084fabdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '56273e2f6f8c8c8b767d2520af0d4613') in 0.0226597 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.131803 seconds.
-  path: Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO/Prefabs
-  artifactKey: Guid(51c295349f04f5c45ad087821881e28c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO/Prefabs using Guid(51c295349f04f5c45ad087821881e28c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd770e440fc1232a07e3b0917ef065004') in 0.0007086 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.930671 seconds.
-  path: Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO/Prefabs/SteamVFX
-  artifactKey: Guid(ca6ef333f015a8e4c8de3c462ff5bb87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/Steam VFX Pack/VFX/Steam VFX DEMO/Prefabs/SteamVFX using Guid(ca6ef333f015a8e4c8de3c462ff5bb87) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1f89fdf07355cc42cf3477806722ee38') in 0.000701 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 309.466884 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP
-  artifactKey: Guid(d48c288d8b919fa45b4cfb84b117484d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP using Guid(d48c288d8b919fa45b4cfb84b117484d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '393227299b69077ef4bbd492386c0a4d') in 0.0009746 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.299602 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP
-  artifactKey: Guid(64325cbe39273d544950db2de4840444) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP using Guid(64325cbe39273d544950db2de4840444) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b50f1fd8e0868942016b0e351ea1251') in 0.000618 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.490621 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP/volcanic_rocks_L2_01_HDRP.prefab
-  artifactKey: Guid(2f0d4c9f49415194095fde68944a004a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP/volcanic_rocks_L2_01_HDRP.prefab using Guid(2f0d4c9f49415194095fde68944a004a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '28db95340e709263d0f4f0f817cf048b') in 0.1745661 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 583
-
-========================================================================
-Received Import Request.
-  Time since last request: 84.696843 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP/volcanic_rocks_L2_01_HDRP.prefab
-  artifactKey: Guid(2f0d4c9f49415194095fde68944a004a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP/volcanic_rocks_L2_01_HDRP.prefab using Guid(2f0d4c9f49415194095fde68944a004a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '930b27fcab622d4a6aee461960c424ee') in 0.0359586 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 113
-
-========================================================================
-Received Import Request.
-  Time since last request: 275.667950 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/Meshes/volcanic_rocks_L2_exp_04.fbx
-  artifactKey: Guid(7d441cd4d919a3c4b928acdf006cacb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/Meshes/volcanic_rocks_L2_exp_04.fbx using Guid(7d441cd4d919a3c4b928acdf006cacb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ed96d696de24a06b0b92d0ccffa8da2a') in 0.6641845 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 577
-
-========================================================================
-Received Import Request.
-  Time since last request: 11.523986 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/Textures/rocks_L2/rocks_L2_low_rocks_L2_M_2_AlbedoTransparency 1.png
-  artifactKey: Guid(4a0e25cfb6b4bb9499e2e676ca0c6a7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/Textures/rocks_L2/rocks_L2_low_rocks_L2_M_2_AlbedoTransparency 1.png using Guid(4a0e25cfb6b4bb9499e2e676ca0c6a7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a31523cf679b747ec7a902f9393654d0') in 0.0276172 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.527574 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/Textures/rocks_L2/rocks_L2_low_rocks_L2_M_2_AmbientOcclusion 1.png
-  artifactKey: Guid(bdf2ed64f34a42f41a4f455ea8bca1f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/Textures/rocks_L2/rocks_L2_low_rocks_L2_M_2_AmbientOcclusion 1.png using Guid(bdf2ed64f34a42f41a4f455ea8bca1f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a78d68f41f7a304e2e5a75b54be590d9') in 0.0206863 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.945572 seconds.
-  path: Assets/Materials
-  artifactKey: Guid(e953770f33331d843807e78e23a2708a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials using Guid(e953770f33331d843807e78e23a2708a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fbfd64efd30d920d9988d0aea7a0e680') in 0.0008138 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 126.932321 seconds.
-  path: Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP/volcanic_rocks_L2_01_HDRP.prefab
-  artifactKey: Guid(2f0d4c9f49415194095fde68944a004a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity Store DL/3D_Sci-fi_volcanic_rocks_01/HDRP/Prefabs_HDRP/volcanic_rocks_L2_01_HDRP.prefab using Guid(2f0d4c9f49415194095fde68944a004a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b893c4d5a96bc646f7a1d63cfd0b5499') in 0.0438431 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 583
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 1.52 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 44 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6197 unused Assets / (9.0 MB). Loaded Objects now: 6829.
-Memory consumption went from 142.3 MB to 133.3 MB.
-Total: 15.777100 ms (FindLiveObjects: 1.090100 ms CreateObjectMapping: 0.384600 ms MarkObjects: 6.676300 ms  DeleteObjects: 7.624800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 1.33 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 44 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6197 unused Assets / (7.8 MB). Loaded Objects now: 6829.
-Memory consumption went from 142.3 MB to 134.5 MB.
-Total: 12.497400 ms (FindLiveObjects: 0.871800 ms CreateObjectMapping: 0.325800 ms MarkObjects: 6.867500 ms  DeleteObjects: 4.430500 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file data-0000026222B7CF20 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-00000262254BCF40 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-00000262227D4010 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Rider.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file data-00000262227DE420 doesn't match image C:\Users\jeffi\Documents\GitHub\ProjectPrototype\ProjectPrototype\Library\ScriptAssemblies\Unity.Settings.Editor.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.057 seconds
-Refreshing native plugins compatible for Editor in 1.62 ms, found 3 plugins.
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.771 seconds
-Domain Reload Profiling: 1823ms
-	BeginReloadAssembly (256ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (65ms)
-	RebuildCommonClasses (53ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (39ms)
-	LoadAllAssembliesAndSetupDomain (686ms)
-		LoadAssemblies (527ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (289ms)
-			TypeCache.Refresh (17ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (254ms)
-			ResolveRequiredComponents (13ms)
-	FinalizeReload (772ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (630ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (3ms)
-			BeforeProcessingInitializeOnLoad (139ms)
-			ProcessInitializeOnLoadAttributes (413ms)
-			ProcessInitializeOnLoadMethodAttributes (63ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 1.46 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 44 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6204 unused Assets / (8.2 MB). Loaded Objects now: 6830.
-Memory consumption went from 141.7 MB to 133.5 MB.
-Total: 18.280100 ms (FindLiveObjects: 1.825000 ms CreateObjectMapping: 1.868000 ms MarkObjects: 8.306000 ms  DeleteObjects: 6.278400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 902.701045 seconds.
-  path: Assets/Prefabs/Traps/Lava Asteroid.prefab
-  artifactKey: Guid(d29257280a75d1e48b471e6b4d4db935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Traps/Lava Asteroid.prefab using Guid(d29257280a75d1e48b471e6b4d4db935) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fe2f1668abec6b6f1864d16ecb29114f') in 0.1312982 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
+Unloading 6208 unused Assets / (8.3 MB). Loaded Objects now: 6779.
+Memory consumption went from 166.5 MB to 158.2 MB.
+Total: 13.908200 ms (FindLiveObjects: 2.230500 ms CreateObjectMapping: 1.510900 ms MarkObjects: 5.651400 ms  DeleteObjects: 4.513800 ms)
 
