@@ -19,12 +19,18 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.SwapSettingsScreen();
     }
 
+    // Make this take in a paramater of either strings or scene, based on the scene load that scene
+    public void changeScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void quit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+    #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+    #else
+            Application.Quit();
+    #endif
     }
 }
