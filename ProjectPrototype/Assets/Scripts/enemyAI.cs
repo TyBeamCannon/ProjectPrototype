@@ -14,6 +14,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
+
+    bool playerInRange;
+
     float shootTimer;
 
     Color colorOrig;
@@ -30,26 +33,49 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        playerDir = (gameManager.instance.player.transform.position - transform.position);
-
-        agent.SetDestination(gameManager.instance.player.transform.position);
-
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if(playerInRange)
         {
-            FaceTarget();
+            playerDir = (gameManager.instance.player.transform.position - transform.position);
+
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                FaceTarget();
+            }
+
+            shootTimer += Time.deltaTime;
+
+            if (shootTimer >= shootRate)
+            {
+                Shoot();
+            }
         }
 
-        shootTimer += Time.deltaTime;
+    }
 
-        if (shootTimer >= shootRate)
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
         {
-            Shoot();
+            playerInRange = true;   
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
         StartCoroutine(FlashRed());
+
+        agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
