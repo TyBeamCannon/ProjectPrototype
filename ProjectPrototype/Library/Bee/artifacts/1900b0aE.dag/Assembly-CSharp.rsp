@@ -441,6 +441,8 @@
 "Assets/Scripts/playerController.cs"
 "Assets/Scripts/PrototypeScripts/asteroidGeyser.cs"
 "Assets/Scripts/PrototypeScripts/fighterDroidAI.cs"
+"Assets/Scripts/PrototypeScripts/mineable.cs"
+"Assets/Scripts/PrototypeScripts/mineTool.cs"
 "Assets/Scripts/PrototypeScripts/zeroG.cs"
 "Assets/Scripts/settingFunctions.cs"
 "Assets/Unity Store DL/Asteroids Pack/Assets/Scripts/RandomRotator.cs"

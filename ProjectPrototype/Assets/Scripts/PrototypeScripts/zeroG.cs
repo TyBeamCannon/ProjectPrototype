@@ -1,19 +1,27 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class zeroG : MonoBehaviour
 {
-
+    // This controls the players speed in the Zero G environment
     [Header("Thrust Settings")]
     [SerializeField] float thrustForce = 5f;
     [SerializeField] float strafeForce = 4f;
     [SerializeField] float ascendForce = 4f;
     [SerializeField] float maxSpeed = 10f;
 
-    [Header("Look Settings")]
-    [SerializeField] float lookSensitivity = 2f;
+    private AudioSource thrusterAudio;
 
+    // How fast the player can look around
+    [Header("Look Settings")]
+    [SerializeField] float lookSensitivity = 0.5f;
+    [SerializeField] float mouseSmoothTime = 0.15f;
+
+    // Private variables for internal use
     private Rigidbody rb;
     private Camera playerCam;
+    private Vector2 smoothMouseDelta;
+    private float verticalLookRotation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,32 +30,64 @@ public class zeroG : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerCam = GetComponentInChildren<Camera>(); 
 
+        // Lock the mouse cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        thrusterAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         HandleMouseLook();
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Stabilize();
+        }
     }
 
     void FixedUpdate()
     {
         HandleMovement();
+
+
+        bool isThrusting = Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0 || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftControl);
+
+        if (isThrusting)
+        {
+            if(!thrusterAudio.isPlaying)
+            {
+                thrusterAudio.Play(); 
+            }
+        }
+        else
+        {
+            if(thrusterAudio.isPlaying)
+            {
+                thrusterAudio.Stop();
+            }
+        }
+
     }
 
     void HandleMouseLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
 
-        transform.Rotate(0f, mouseX, 0f);
+        // Get Raw mouse input
+        Vector2 targetMouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * lookSensitivity;
 
-        Vector3 currentRotation = playerCam.transform.localEulerAngles;
-        currentRotation.x -= mouseY;
-        currentRotation.x = Mathf.Clamp(currentRotation.x, -89f, 89f);
-        playerCam.transform.localEulerAngles = new Vector3(currentRotation.x, 0f, 0f);
+        // smooth the input over time
+        smoothMouseDelta = Vector2.Lerp(smoothMouseDelta, targetMouseDelta, 1f / mouseSmoothTime);
+
+        // Rotate the player left/right
+        transform.Rotate(Vector3.up * smoothMouseDelta.x);
+
+        // Adjust and clamp vertical camera rotation
+        verticalLookRotation -= smoothMouseDelta.y;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -89f, 89f);
+        playerCam.transform.localEulerAngles = new Vector3(verticalLookRotation, 0f, 0f);
     }
 
     void HandleMovement()
@@ -67,6 +107,24 @@ public class zeroG : MonoBehaviour
         {
             rb.AddForce(forceDir, ForceMode.Acceleration);
         }
+
+    }
+
+    void Stabilize()
+    {
+        // Instantly stop all movement
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        // Re-Center player rotation (no roll/tilt)
+        Vector3 flatRotation = transform.eulerAngles;
+        flatRotation.z = 0f;
+        transform.eulerAngles = flatRotation;
+
+        // Re-center camera vertical look
+        verticalLookRotation = 0f;
+        playerCam.transform.localEulerAngles = Vector3.zero;
+
 
     }
 

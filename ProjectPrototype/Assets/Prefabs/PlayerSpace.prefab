@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2912958190967755438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 521581897200494680}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &521581897200494680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912958190967755438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3969640822559541766}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5794075752208093592
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +94,7 @@ GameObject:
   - component: {fileID: 4951719872928762203}
   - component: {fileID: 2763944020886486658}
   - component: {fileID: 7848646726221496778}
+  - component: {fileID: 4374744110004998717}
   m_Layer: 0
   m_Name: PlayerSpace
   m_TagString: Player
@@ -84,6 +116,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3846722628785071086}
+  - {fileID: 521581897200494680}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4990587308273593098
@@ -176,7 +209,8 @@ MonoBehaviour:
   strafeForce: 2
   ascendForce: 2
   maxSpeed: 10
-  lookSensitivity: 60
+  lookSensitivity: 1
+  mouseSmoothTime: 0.1
 --- !u!54 &7848646726221496778
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -204,6 +238,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4374744110004998717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502130098229712475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5995b93d0408b2c40aacaf7b36aee947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleModeKey: 102
+  miningRange: 10
+  miningDamage: 1
+  mineKey: 324
+  projectilePrefab: {fileID: 1462888220985423246, guid: 9eef331614290e742a89f196b5755a46, type: 3}
+  firePoint: {fileID: 0}
+  projectileForce: 1
+  playerCam: {fileID: 0}
 --- !u!1 &7626093684060996763
 GameObject:
   m_ObjectHideFlags: 0
