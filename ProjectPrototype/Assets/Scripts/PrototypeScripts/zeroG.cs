@@ -40,6 +40,9 @@ public class zeroG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.instance.isPaused)
+            thrusterAudio.Stop();
+
         HandleMouseLook();
 
         if(Input.GetKeyDown(KeyCode.R))

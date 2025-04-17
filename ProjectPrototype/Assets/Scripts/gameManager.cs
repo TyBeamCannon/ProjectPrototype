@@ -25,6 +25,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject player;
     public playerController playerScript;
+    [SerializeField] TMP_Text modeText;
 
     [Header("---- Meters ----")]
     [SerializeField] Image healthBar;
@@ -43,10 +44,12 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
 
-        //GameObject.FindWithTag("PostProcess").GetComponent<PostProcessVolume>().profile.GetSetting<Grain>().intensity.value = Camera.main.GetComponent<AudioSource>().volume = 0.01f;
+        GameObject.FindWithTag("PostProcess").GetComponent<PostProcessVolume>().profile.GetSetting<Grain>().intensity.value = Camera.main.GetComponent<AudioSource>().volume = 0.01f;
         
 
         timeScaleOrig = Time.timeScale;
+
+        modeText.text = "Mining Mode";
     }
 
     // Update is called once per frame
@@ -135,4 +138,18 @@ public class gameManager : MonoBehaviour
     {
         oreMeter.fillAmount = 1 - ((float)gameGoalCount / goalCountOrig);
     }
+
+    public void SwapModes()
+    {
+        if (modeText.text == "Mining Mode")
+        {
+            modeText.text = "Weapon Mode";
+        }
+        else if (modeText.text == "Weapon Mode")
+        {
+            modeText.text = "Mining Mode";
+        }
+    }
+
+    public bool IsPaused { get { return isPaused; } }
 }

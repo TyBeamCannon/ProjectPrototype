@@ -38,6 +38,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             agent.SetDestination(gameManager.instance.player.transform.position);
 
+            agent.baseOffset = (gameManager.instance.player.transform.position.y);
+
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 FaceTarget();
@@ -55,6 +57,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+            return;
         if(other.CompareTag("Player"))
         {
             playerInRange = true;   
@@ -63,6 +67,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger)
+            return;
         if (other.CompareTag("Player"))
         {
             playerInRange = false;

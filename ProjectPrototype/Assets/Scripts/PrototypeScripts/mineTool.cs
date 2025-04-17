@@ -35,6 +35,7 @@ public class mineTool : MonoBehaviour
         {
             isCombatMode = !isCombatMode;
             Debug.Log(isCombatMode ? "Combat Mode" : "Mining Mode");
+            gameManager.instance.SwapModes();
         }
 
         if(Input.GetKeyDown(mineKey))

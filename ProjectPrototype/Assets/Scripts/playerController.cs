@@ -21,6 +21,9 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
 
+    [Header("---- Audio ----")]
+    [SerializeField] AudioSource thrusterAudio;
+
     int jumpCount;
     int HPOrig;
 

@@ -9,10 +9,13 @@ public class fighterDroidAI : MonoBehaviour, IDamage
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
-
+    
     [SerializeField] Transform[] shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+
+
+    bool playerInRange;
 
     float shootTimer;
 
@@ -24,36 +27,63 @@ public class fighterDroidAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        gameManager.instance.UpdateGameGoal(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerDir = (gameManager.instance.player.transform.position - transform.position);
-
-        agent.SetDestination(gameManager.instance.player.transform.position);
-
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (playerInRange)
         {
-            FaceTarget();
+            playerDir = (gameManager.instance.player.transform.position - transform.position);
+
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
+            agent.baseOffset = (gameManager.instance.player.transform.position.y);
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                FaceTarget();
+            }
+
+            shootTimer += Time.deltaTime;
+
+            if (shootTimer >= shootRate)
+            {
+                Shoot();
+            }
         }
 
-        shootTimer += Time.deltaTime;
+    }
 
-        if (shootTimer >= shootRate)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.isTrigger)
+            return;
+        if (other.CompareTag("Player"))
         {
-            Shoot();
+            playerInRange = true;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.isTrigger)
+            return;
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
         StartCoroutine(FlashRed());
 
+        agent.SetDestination(gameManager.instance.player.transform.position);
+
         if (HP <= 0)
         {
-            gameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
         }
     }
@@ -65,16 +95,17 @@ public class fighterDroidAI : MonoBehaviour, IDamage
         model.material.color = colorOrig;
     }
 
-    void Shoot()
-    {
-        shootTimer = 0;
-        int shootSide =  Random.Range(0, shootPos.Length);
-        Instantiate(bullet, shootPos[shootSide].position, transform.rotation);
-    }
-
     void FaceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+    }
+
+
+    void Shoot()
+    {
+        shootTimer = 0;
+        int shootSide = Random.Range(0, shootPos.Length);
+        Instantiate(bullet, shootPos[shootSide].position, transform.rotation);
     }
 }
