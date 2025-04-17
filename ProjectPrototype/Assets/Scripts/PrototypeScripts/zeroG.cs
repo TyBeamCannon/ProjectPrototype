@@ -41,14 +41,19 @@ public class zeroG : MonoBehaviour
     void Update()
     {
         if (gameManager.instance.isPaused)
-            thrusterAudio.Stop();
-
-        HandleMouseLook();
-
-        if(Input.GetKeyDown(KeyCode.R))
         {
-            Stabilize();
+            thrusterAudio.Stop();
         }
+        else {
+            HandleMouseLook();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Stabilize();
+            }
+        }
+        
+        
     }
 
     void FixedUpdate()
