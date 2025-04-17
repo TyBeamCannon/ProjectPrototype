@@ -52,7 +52,7 @@ MonoBehaviour:
   damageAmount: 1
   damageRate: 0
   speed: 25
-  destroyTime: 3
+  destroyTime: 2
 --- !u!135 &3121986311208963231
 SphereCollider:
   m_ObjectHideFlags: 0

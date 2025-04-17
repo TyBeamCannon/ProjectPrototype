@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 6557655191056292277}
   - component: {fileID: 3867506995171525156}
   - component: {fileID: 6169102987815157964}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776078985070b6745872aa1ed3ca4411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 10
   thrustForce: 2
   strafeForce: 2
   ascendForce: 2

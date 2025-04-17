@@ -1,8 +1,13 @@
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
-public class zeroG : MonoBehaviour
+public class zeroG : MonoBehaviour, IDamage
 {
+
+    [SerializeField] int HP;
+
+
     // This controls the players speed in the Zero G environment
     [Header("Thrust Settings")]
     [SerializeField] float thrustForce = 5f;
@@ -23,6 +28,8 @@ public class zeroG : MonoBehaviour
     private Vector2 smoothMouseDelta;
     private float verticalLookRotation;
 
+    int HPOrig;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +42,8 @@ public class zeroG : MonoBehaviour
         Cursor.visible = false;
 
         thrusterAudio = GetComponent<AudioSource>();
+
+        HPOrig = HP;
     }
 
     // Update is called once per frame
@@ -133,7 +142,35 @@ public class zeroG : MonoBehaviour
         verticalLookRotation = 0f;
         playerCam.transform.localEulerAngles = Vector3.zero;
 
+        // Restablize camera if offset
+        GameObject.FindWithTag("Player").transform.rotation = new Quaternion(0f,0f, 0f, 0f);
 
+
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashDamageScreen());
+
+        if (HP <= 0)
+        {
+            // You Lose !
+            gameManager.instance.YouLose();
+        }
+    }
+
+    public void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+
+    IEnumerator flashDamageScreen()
+    {
+        gameManager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerDamageScreen.SetActive(false);
     }
 
 }

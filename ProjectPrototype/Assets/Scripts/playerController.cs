@@ -46,9 +46,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.white);
 
-        Movement();
+        //Movement();
 
-        Sprint();
+        //Sprint();
     }
 
     void Movement()
