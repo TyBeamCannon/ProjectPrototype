@@ -26,12 +26,14 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerController playerScript;
 
-    [Header("---- Health ----")]
+    [Header("---- Meters ----")]
     [SerializeField] Image healthBar;
+    [SerializeField] Image oreMeter;
 
     float timeScaleOrig;
 
     int gameGoalCount;
+    int goalCountOrig;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -93,6 +95,11 @@ public class gameManager : MonoBehaviour
         gameGoalCount += amount;
         gameGoalCountText.text = gameGoalCount.ToString("F0");
 
+        if (amount > 0)
+        {
+            goalCountOrig += amount;
+        }
+
 
         if (gameGoalCount <= 0)
         {
@@ -122,5 +129,10 @@ public class gameManager : MonoBehaviour
             menuActive = menuPause;
             menuActive.SetActive(true);
         }
+    }
+
+    public void UpdateOreMeter()
+    {
+        oreMeter.fillAmount = 1 - ((float)gameGoalCount / goalCountOrig);
     }
 }
