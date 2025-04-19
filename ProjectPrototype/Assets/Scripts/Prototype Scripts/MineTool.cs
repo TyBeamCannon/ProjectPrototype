@@ -13,6 +13,13 @@ public class MineTool : MonoBehaviour
     [SerializeField] float miningRange;
     [SerializeField] int miningDamage;
     [SerializeField] KeyCode mineKey = KeyCode.Mouse0;
+    [SerializeField] Transform laserOrigin;
+    [SerializeField] LineRenderer laserLine;
+    [SerializeField] float damagePerSecond;
+    [SerializeField] LayerMask miningLayer;
+
+    IMine currentTarget = null;
+    bool isMining = false;
 
     [Header("Weapon Settings")]
     [SerializeField] GameObject projectilePrefab;
@@ -37,30 +44,47 @@ public class MineTool : MonoBehaviour
             Debug.Log(isCombatMode ? "Combat Mode" : "Mining Mode");
         }
 
-        if(Input.GetKeyDown(mineKey))
+        // Laser mining (hold down to fire a mining laser damaging the ore over time)
+        if(!isCombatMode && Input.GetKey(mineKey))
         {
-            if(isCombatMode)
-            {
-                FireProjectile();
-            }
-            else
-            {
-                TryMine();
-            }
+            isMining = true;
+            TryMine();
         }
+        else
+        {
+            isMining = false;
+            StopLaser();
+        }
+
+        // For when you are in combat mode
+        if(isCombatMode && Input.GetKeyDown(mineKey))
+        {
+            FireProjectile();
+        }
+
     }
 
     void TryMine()
     {
         Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
 
-        if(Physics.Raycast(ray, out RaycastHit hit, miningRange))
+        laserLine.enabled = true;
+        laserLine.SetPosition(0, laserOrigin.position);
+
+        if(Physics.Raycast(ray, out RaycastHit hit, miningRange, miningLayer))
         {
-            IMine ore = hit.collider.GetComponent<IMine>();
-            if(ore != null)
+            laserLine.SetPosition(1, hit.point);
+
+            currentTarget = hit.collider.GetComponent<IMine>();
+            if(currentTarget != null)
             {
-                ore.Mine(miningDamage);
+                currentTarget.Mine(Mathf.RoundToInt(damagePerSecond * Time.deltaTime));
             }
+        }
+        else
+        {
+            laserLine.SetPosition(1, playerCam.transform.position + playerCam.transform.forward * miningRange);
+            currentTarget = null;
         }
     }
 
@@ -78,5 +102,11 @@ public class MineTool : MonoBehaviour
         {
             rb.AddForce(firePoint.forward * projectileForce, ForceMode.Impulse);
         }
+    }
+
+    void StopLaser()
+    {
+        laserLine.enabled = false;
+        currentTarget = null;
     }
 }

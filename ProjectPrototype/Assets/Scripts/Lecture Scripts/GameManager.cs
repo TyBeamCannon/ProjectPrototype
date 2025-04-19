@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("---- Menus ----")]
-
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -21,21 +20,23 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     [Header("---- Player ----")]
-
-    public GameObject player;
-    public ZeroG playerScript;
+    [SerializeField] public GameObject player;
+    [SerializeField] public ZeroG playerScript;
     [SerializeField] int maxGoldCarry;
 
     [Header("---- Meters ----")]
-    public Image healthMeter;
-    public Image crystalMeter;
-    public Image goldMeter;
+    [SerializeField] public Image healthMeter;
+    [SerializeField] public Image crystalMeter;
+    [SerializeField] public Image goldMeter;
+    [SerializeField] int crystalCount;
+    [SerializeField] int crystalCountOrig;
+    [SerializeField] int goldCount;
+    [SerializeField] int maxCrystalGoal;
 
 
     float timeScaleOrig;
 
-    int crystalCount;
-    int crystalCountOrig;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,11 +103,30 @@ public class GameManager : MonoBehaviour
             crystalCountOrig += amount;
         }
 
+        crystalCount = Mathf.Clamp(crystalCount, 0 , maxCrystalGoal);
 
-        if (crystalCount <= 0)
+
+        if (crystalMeter != null)
         {
-            // You Won !
+            crystalMeter.fillAmount = (float)crystalCount / maxCrystalGoal;
+        }
+
+        if (crystalCount >= maxCrystalGoal)
+        {
             StatePause(menuWin);
+        }
+
+
+    }
+
+    public void UpdateGoldCount(int amount)
+    {
+        goldCount += amount;
+        goldCount = Mathf.Max(0, goldCount);
+
+        if (goldMeter != null && maxGoldCarry > 0)
+        {
+            goldMeter.fillAmount = (float)goldCount / maxGoldCarry;
         }
     }
 

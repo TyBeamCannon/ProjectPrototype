@@ -1,44 +1,26 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class Ore : MonoBehaviour, IMine
 {
-    enum oreType { gold, crystal };
-    [SerializeField] oreType type;
-
+    public enum OreType { Gold, Crystal };
+    [SerializeField] OreType type;
     [SerializeField] int oreAmount;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        if (type == oreType.crystal)
-        {
-            GameManager.instance.UpdateCrystalCount(oreAmount);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Mine(int damage)
     {
-        oreAmount -= damage;
+        int actualDamage = Mathf.Min(damage, oreAmount);
+        oreAmount -= actualDamage;
 
-        if (type == oreType.crystal)
+        switch (type)
         {
-            if (damage > oreAmount)
-            {
-                GameManager.instance.UpdateCrystalCount(-oreAmount);
-            }
-            else
-            {
-                GameManager.instance.UpdateCrystalCount(-damage);
-            }
+            case OreType.Crystal:
+                GameManager.instance.UpdateCrystalCount(-actualDamage);
+                break;
+            case OreType.Gold:
+                GameManager.instance.UpdateGoldCount(-actualDamage);
+                break;
         }
+
 
         if (oreAmount <= 0)
         {
@@ -46,6 +28,6 @@ public class Ore : MonoBehaviour, IMine
         }
     }
 
-    public int OreAmount { get { return oreAmount; } }
+    public int OreAmount => oreAmount;
 
 }
