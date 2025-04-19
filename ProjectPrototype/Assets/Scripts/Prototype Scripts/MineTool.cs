@@ -4,11 +4,6 @@ public class MineTool : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    //Tool mode
-    [Header("Tool Mode")]
-    [SerializeField] private KeyCode toggleModeKey = KeyCode.F;
-    bool isCombatMode = false;
-
     [Header("Mine Settings")]
     [SerializeField] float miningRange;
     [SerializeField] KeyCode mineKey = KeyCode.Mouse0;
@@ -46,7 +41,8 @@ public class MineTool : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera playerCam;
 
-
+    // Bools
+    bool isAiming = false;
     
     void Start()
     {
@@ -56,19 +52,42 @@ public class MineTool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(toggleModeKey))
+
+        // If the player is holding down the right mouse button, then isAiming is true
+        isAiming = Input.GetMouseButton(1);
+
+        if(isAiming)
         {
-            isCombatMode = !isCombatMode;
-            Debug.Log(isCombatMode ? "Combat Mode" : "Mining Mode");
+            StopLaser();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                FireProjectile();
+            }
+        }
+        else
+        {
+            if(Input.GetMouseButton(0))
+            {
+                isMining = true;
+                TryMine();
+            }
+            else
+            {
+                isMining = false;
+                StopLaser();
+            }
         }
 
+        pingTimer += Time.deltaTime;
         if(Input.GetKeyDown(KeyCode.Q) && pingTimer >= pingCooldown)
         {
             pingTimer = 0f;
 
             if(pingPulsePrefab != null && pingOrigin != null)
             {
-                Instantiate(pingPulsePrefab, pingOrigin.position, Quaternion.identity);
+                Vector3 spawnPos = transform.position;
+                Instantiate(pingPulsePrefab, spawnPos, Quaternion.identity);
             }
 
             if(pingSound != null & pingAudioSource != null)
@@ -77,23 +96,6 @@ public class MineTool : MonoBehaviour
             }
         }
 
-        // Laser mining (hold down to fire a mining laser damaging the ore over time)
-        if(!isCombatMode && Input.GetKey(mineKey))
-        {
-            isMining = true;
-            TryMine();
-        }
-        else
-        {
-            isMining = false;
-            StopLaser();
-        }
-
-        // For when you are in combat mode
-        if(isCombatMode && Input.GetKeyDown(mineKey))
-        {
-            FireProjectile();
-        }
 
     }
 
@@ -141,17 +143,20 @@ public class MineTool : MonoBehaviour
 
     void FireProjectile()
     {
-        if(projectilePrefab == null || firePoint == null)
+        if(projectilePrefab == null || firePoint == null || playerCam == null)
         {
-            Debug.LogWarning("Projectile or FirePoint not assigned!");
+            Debug.LogWarning("Projectile or FirePoint, or Camera not assigned!");
             return;
         }
 
-        GameObject shot = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Vector3 shootDirection = playerCam.transform.forward;
+
+        GameObject shot = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(shootDirection));
+        
         Rigidbody rb = shot.GetComponent<Rigidbody>();
         if(rb != null)
         {
-            rb.AddForce(firePoint.forward * projectileForce, ForceMode.Impulse);
+            rb.AddForce(shootDirection * projectileForce, ForceMode.Impulse);
         }
     }
 

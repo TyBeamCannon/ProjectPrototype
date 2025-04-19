@@ -32,7 +32,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int crystalCountOrig;
     [SerializeField] int goldCount;
     [SerializeField] int maxCrystalGoal;
-
+    [SerializeField] float crystalDisplaySpeed = 2f;
+    [SerializeField] float crystalDisplayAmount = 0f;
+    [SerializeField] float crystalDisplayFillAmount = 0f;
 
     float timeScaleOrig;
 
@@ -72,6 +74,10 @@ public class GameManager : MonoBehaviour
             }
 
         }
+
+        crystalDisplayFillAmount = Mathf.Lerp(crystalDisplayFillAmount, (float)crystalCount / crystalCountOrig, Time.deltaTime * crystalDisplaySpeed);
+        crystalMeter.fillAmount = crystalDisplaySpeed;
+
     }
 
     public void StatePause(GameObject menuToActivate)
@@ -104,12 +110,6 @@ public class GameManager : MonoBehaviour
         }
 
         crystalCount = Mathf.Clamp(crystalCount, 0 , maxCrystalGoal);
-
-
-        if (crystalMeter != null)
-        {
-            crystalMeter.fillAmount = (float)crystalCount / maxCrystalGoal;
-        }
 
         if (crystalCount >= maxCrystalGoal)
         {
