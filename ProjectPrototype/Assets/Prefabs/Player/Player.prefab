@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2220403155250935913}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.601}
+  m_LocalPosition: {x: 0.36, y: 0, z: 0.601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180,8 +180,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -199,7 +199,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b22011273fd793e47b85c1f563f8d09c, type: 3}
   m_Resource: {fileID: 8300000, guid: b22011273fd793e47b85c1f563f8d09c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.44
+  m_Volume: 0.737
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -331,7 +331,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleModeKey: 102
   miningRange: 20
-  miningDamage: 1
   mineKey: 323
   laserOrigin: {fileID: 7501184674667088484}
   laserLine: {fileID: 8055025140082309939}
@@ -342,6 +341,13 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 7501184674667088484}
   projectileForce: 0
+  flickerSpeed: 20
+  flickerIntensity: 0.06
+  baseLaserWidth: 0.01
+  pingPulsePrefab: {fileID: 6613605028473290788, guid: 28e276481bda98448878a0423c17f9e0, type: 3}
+  pingOrigin: {fileID: 150397383093977183}
+  pingSound: {fileID: 8300000, guid: 0bb753e6fabdbd2449e29b9448186216, type: 3}
+  pingCooldown: 3
   playerCam: {fileID: 2159446758914375735}
 --- !u!120 &8055025140082309939
 LineRenderer:
@@ -354,7 +360,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -435,7 +441,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 2
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
@@ -581,7 +587,7 @@ MonoBehaviour:
   ascendForce: 2
   maxSpeed: 10
   lookSensitivity: 1
-  mouseSmoothTime: 0.1
+  mouseSmoothTime: 0.38
 --- !u!54 &6557655191056292277
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -622,7 +628,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 09a04e41094e0eb4e88757fed4ea8c96, type: 3}
   m_Resource: {fileID: 8300000, guid: 09a04e41094e0eb4e88757fed4ea8c96, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.033
+  m_Volume: 0.223
   m_Pitch: 1
   Loop: 1
   Mute: 0

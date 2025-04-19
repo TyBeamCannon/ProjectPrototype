@@ -11,7 +11,6 @@ public class MineTool : MonoBehaviour
 
     [Header("Mine Settings")]
     [SerializeField] float miningRange;
-    [SerializeField] int miningDamage;
     [SerializeField] KeyCode mineKey = KeyCode.Mouse0;
     [SerializeField] Transform laserOrigin;
     [SerializeField] LineRenderer laserLine;
@@ -26,13 +25,32 @@ public class MineTool : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] float projectileForce;
 
+    float miningDamageBuffer = 0f;
+
+    [Header("Laser Flicker")]
+    [SerializeField] float flickerSpeed;
+    [SerializeField] float flickerIntensity;
+    [SerializeField] float baseLaserWidth;
+
+    float flickerTimer = 0;
+
+    [Header("Scanner Ping")]
+    [SerializeField] GameObject pingPulsePrefab;
+    [SerializeField] Transform pingOrigin;
+    [SerializeField] AudioClip pingSound;
+    [SerializeField] float pingCooldown = 3f;
+
+    float pingTimer = 0f;
+    AudioSource pingAudioSource;
+
     [Header("References")]
     [SerializeField] Camera playerCam;
+
 
     
     void Start()
     {
-        
+        pingAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +60,21 @@ public class MineTool : MonoBehaviour
         {
             isCombatMode = !isCombatMode;
             Debug.Log(isCombatMode ? "Combat Mode" : "Mining Mode");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q) && pingTimer >= pingCooldown)
+        {
+            pingTimer = 0f;
+
+            if(pingPulsePrefab != null && pingOrigin != null)
+            {
+                Instantiate(pingPulsePrefab, pingOrigin.position, Quaternion.identity);
+            }
+
+            if(pingSound != null & pingAudioSource != null)
+            {
+                pingAudioSource.PlayOneShot(pingSound);
+            }
         }
 
         // Laser mining (hold down to fire a mining laser damaging the ore over time)
@@ -75,10 +108,28 @@ public class MineTool : MonoBehaviour
         {
             laserLine.SetPosition(1, hit.point);
 
+            flickerTimer += Time.deltaTime * flickerSpeed;
+            float flicker = Mathf.Sin(flickerTimer) * flickerIntensity;
+            float currentWidth = baseLaserWidth + flicker;
+
+            laserLine.startWidth = currentWidth;
+            laserLine.endWidth = currentWidth;
+
             currentTarget = hit.collider.GetComponent<IMine>();
             if(currentTarget != null)
             {
                 currentTarget.Mine(Mathf.RoundToInt(damagePerSecond * Time.deltaTime));
+
+                miningDamageBuffer += damagePerSecond * Time.deltaTime;
+
+                if(miningDamageBuffer >= 1f)
+                {
+                    int damageToApply = Mathf.FloorToInt(miningDamageBuffer);
+                    currentTarget.Mine(damageToApply);
+                    miningDamageBuffer -= damageToApply;
+                }
+
+
             }
         }
         else
