@@ -19,7 +19,12 @@ public class MineTool : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform firePoint;
     [SerializeField] float projectileForce;
+    [SerializeField] float fireRange;
+    [SerializeField] int damage;
+    [SerializeField] GameObject hitFX;
+    [SerializeField] float fireRate = 0.1f;
 
+    float nextFireTime = 0f;
     float miningDamageBuffer = 0f;
 
     [Header("Laser Flicker")]
@@ -41,6 +46,8 @@ public class MineTool : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera playerCam;
 
+
+
     // Bools
     bool isAiming = false;
     
@@ -60,8 +67,9 @@ public class MineTool : MonoBehaviour
         {
             StopLaser();
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
             {
+                nextFireTime = Time.time + fireRate;
                 FireProjectile();
             }
         }
@@ -143,20 +151,29 @@ public class MineTool : MonoBehaviour
 
     void FireProjectile()
     {
-        if(projectilePrefab == null || firePoint == null || playerCam == null)
+
+        if( playerCam == null)
         {
-            Debug.LogWarning("Projectile or FirePoint, or Camera not assigned!");
+            Debug.LogWarning("Player camera not assigned!");
             return;
         }
 
-        Vector3 shootDirection = playerCam.transform.forward;
+        Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
+        RaycastHit hit;
 
-        GameObject shot = Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(shootDirection));
-        
-        Rigidbody rb = shot.GetComponent<Rigidbody>();
-        if(rb != null)
-        {
-            rb.AddForce(shootDirection * projectileForce, ForceMode.Impulse);
+        if(Physics.Raycast(ray, out hit, fireRange))
+        {   
+            if(hit.collider.TryGetComponent<IDamage>(out var damageTarget))
+            {
+                damageTarget.TakeDamage(damage);
+            }
+
+            if (hitFX != null)
+            {
+                Instantiate(hitFX, hit.point, Quaternion.LookRotation(hit.normal));
+            }
+
+            Debug.Log("Hit: " + hit.collider.name);
         }
     }
 
