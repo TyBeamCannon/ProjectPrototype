@@ -5172,7 +5172,11 @@ MonoBehaviour:
     m_Bits: 1024
   projectilePrefab: {fileID: 1462888220985423246, guid: 9eef331614290e742a89f196b5755a46, type: 3}
   firePoint: {fileID: 7501184674667088484}
-  projectileForce: 10
+  projectileForce: 50
+  fireRange: 50
+  damage: 1
+  hitFX: {fileID: 0}
+  fireRate: 0.1
   flickerSpeed: 20
   flickerIntensity: 0.06
   baseLaserWidth: 0.01
@@ -5415,6 +5419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 10
+  maxGoldCarry: 10
+  maxCrystalCarry: 10
   thrustForce: 2
   strafeForce: 2
   ascendForce: 2

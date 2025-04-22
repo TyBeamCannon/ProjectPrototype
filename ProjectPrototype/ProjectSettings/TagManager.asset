@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PostProcess
+  - Mineable
   layers:
   - Default
   - TransparentFX

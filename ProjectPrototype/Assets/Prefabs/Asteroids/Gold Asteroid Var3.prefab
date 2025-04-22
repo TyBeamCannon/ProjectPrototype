@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 4336188980999872080}
   m_Layer: 0
   m_Name: Gold Asteroid Var3
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

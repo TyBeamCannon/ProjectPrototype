@@ -22,19 +22,21 @@ public class GameManager : MonoBehaviour
     [Header("---- Player ----")]
     [SerializeField] public GameObject player;
     [SerializeField] public ZeroG playerScript;
-    [SerializeField] int maxGoldCarry;
+
+    int maxGoldPlayerCarry;
+    int maxCrystalPlayerCarry;
 
     [Header("---- Meters ----")]
-    [SerializeField] public Image healthMeter;
-    [SerializeField] public Image crystalMeter;
-    [SerializeField] public Image goldMeter;
-    [SerializeField] int crystalCount;
-    [SerializeField] int crystalCountOrig;
-    [SerializeField] int goldCount;
+    public Image healthMeter;
+    public Image crystalMeter;
+    public Image goldMeter;
+
+    [Header("")]
+
     [SerializeField] int maxCrystalGoal;
-    [SerializeField] float crystalDisplaySpeed = 2f;
-    [SerializeField] float crystalDisplayAmount = 0f;
-    [SerializeField] float crystalDisplayFillAmount = 0f;
+    [SerializeField] float crystalDisplaySpeed;
+    [SerializeField] float crystalDisplayAmount;
+    [SerializeField] float crystalDisplayFillAmount;
 
     float timeScaleOrig;
 
@@ -52,7 +54,10 @@ public class GameManager : MonoBehaviour
         
 
         timeScaleOrig = Time.timeScale;
+        
 
+        maxGoldPlayerCarry = playerScript.MaxGoldCarry;
+        maxCrystalPlayerCarry = playerScript.MaxCrystalCarry;
     }
 
     // Update is called once per frame
@@ -75,8 +80,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        crystalDisplayFillAmount = Mathf.Lerp(crystalDisplayFillAmount, (float)crystalCount / crystalCountOrig, Time.deltaTime * crystalDisplaySpeed);
-        crystalMeter.fillAmount = crystalDisplaySpeed;
+        
 
     }
 
@@ -102,16 +106,18 @@ public class GameManager : MonoBehaviour
 
     public void UpdateCrystalCount(int amount)
     {
-        crystalCount += amount;
+        playerScript.Crystal += amount;
 
-        if (amount > 0)
-        {
-            crystalCountOrig += amount;
-        }
+        playerScript.Crystal = Mathf.Clamp(playerScript.Crystal, 0 , maxCrystalGoal);
 
-        crystalCount = Mathf.Clamp(crystalCount, 0 , maxCrystalGoal);
+        // The Lerp does not fill all the way when it should -Jeff
 
-        if (crystalCount >= maxCrystalGoal)
+        //crystalDisplayFillAmount = Mathf.Lerp(crystalDisplayFillAmount, (float)playerScript.Crystal / playerScript.MaxCrystalCarry, Time.deltaTime * crystalDisplaySpeed);
+        //crystalMeter.fillAmount = crystalDisplayFillAmount;
+
+        crystalMeter.fillAmount = (float)playerScript.Crystal / maxCrystalPlayerCarry;
+
+        if (playerScript.Crystal >= maxCrystalGoal)
         {
             StatePause(menuWin);
         }
@@ -121,12 +127,12 @@ public class GameManager : MonoBehaviour
 
     public void UpdateGoldCount(int amount)
     {
-        goldCount += amount;
-        goldCount = Mathf.Max(0, goldCount);
+        playerScript.Gold += amount;
+        playerScript.Gold = Mathf.Max(0, playerScript.Gold);
 
-        if (goldMeter != null && maxGoldCarry > 0)
+        if (goldMeter != null && maxGoldPlayerCarry > 0)
         {
-            goldMeter.fillAmount = (float)goldCount / maxGoldCarry;
+            goldMeter.fillAmount = (float)playerScript.Gold / maxGoldPlayerCarry;
         }
     }
 

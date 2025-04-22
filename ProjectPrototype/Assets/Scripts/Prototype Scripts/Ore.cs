@@ -14,10 +14,10 @@ public class Ore : MonoBehaviour, IMine
         switch (type)
         {
             case OreType.Crystal:
-                GameManager.instance.UpdateCrystalCount(-actualDamage);
+                GameManager.instance.UpdateCrystalCount(actualDamage);
                 break;
             case OreType.Gold:
-                GameManager.instance.UpdateGoldCount(-actualDamage);
+                GameManager.instance.UpdateGoldCount(actualDamage);
                 break;
         }
 

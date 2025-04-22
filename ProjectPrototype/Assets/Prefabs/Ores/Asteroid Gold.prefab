@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3953325576077938473}
+  - component: {fileID: -5178843065666018453}
   - component: {fileID: 5357197007709037260}
   - component: {fileID: 2454089850285953048}
   - component: {fileID: 7155016086871275935}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Asteroid Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +35,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 14.619, y: 0, z: 0}
+--- !u!114 &-5178843065666018453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266755078132491031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef00ba90775b23428d06d0d4fea0ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  oreAmount: 10
 --- !u!33 &5357197007709037260
 MeshFilter:
   m_ObjectHideFlags: 0

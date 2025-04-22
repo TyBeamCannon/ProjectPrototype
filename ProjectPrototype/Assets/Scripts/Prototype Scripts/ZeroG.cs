@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class ZeroG : MonoBehaviour, IDamage
 {
-    
+    [Header("Player Stats")]
     [SerializeField] int HP;
+    [SerializeField] int maxGoldCarry;
+    [SerializeField] int maxCrystalCarry;
+
+    int goldAmount;
+    int crystalAmount;
 
 
     // This controls the players speed in the Zero G environment
     [Header("Thrust Settings")]
-    [SerializeField] float thrustForce = 5f;
-    [SerializeField] float strafeForce = 4f;
-    [SerializeField] float ascendForce = 4f;
-    [SerializeField] float maxSpeed = 10f;
+    [SerializeField] float thrustForce;
+    [SerializeField] float strafeForce;
+    [SerializeField] float ascendForce;
+    [SerializeField] float maxSpeed;
 
     private AudioSource thrusterAudio;
 
     // How fast the player can look around
     [Header("Look Settings")]
-    [SerializeField] float lookSensitivity = 0.5f;
-    [SerializeField] float mouseSmoothTime = 0.15f;
+    [SerializeField] float lookSensitivity;
+    [SerializeField] float mouseSmoothTime;
 
     // Private variables for internal use
     private Rigidbody rb;
@@ -173,4 +178,9 @@ public class ZeroG : MonoBehaviour, IDamage
         GameManager.instance.playerDamageScreen.SetActive(false);
     }
 
+
+    public int MaxGoldCarry { get { return maxGoldCarry; } } 
+    public int Gold { get { return goldAmount; } set { goldAmount = value; } }
+    public int MaxCrystalCarry { get { return maxCrystalCarry; } }
+    public int Crystal {  get { return crystalAmount; } set { crystalAmount = value; } }
 }
