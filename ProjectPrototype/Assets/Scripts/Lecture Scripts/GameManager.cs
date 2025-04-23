@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     [Header("---- Player ----")]
-    [SerializeField] public GameObject player;
-    [SerializeField] public ZeroG playerScript;
+    public GameObject player;
+    public ZeroG playerScript;
 
     int maxGoldPlayerCarry;
     int maxCrystalPlayerCarry;

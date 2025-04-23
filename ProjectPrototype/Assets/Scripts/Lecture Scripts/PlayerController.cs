@@ -1,33 +1,24 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour
 {
+
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] CharacterController controller;
 
     [Header("---- Player Stats ----")]
 
-    [SerializeField] int HP;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
 
-    [Header("---- Gun Stats ----")]
-
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDist;
-    [SerializeField] float shootRate;
-
-    [Header("---- Audio ----")]
-    [SerializeField] AudioSource thrusterAudio;
+    Camera playerCam;
 
     int jumpCount;
     int HPOrig;
-
-    float shootTimer;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -37,18 +28,18 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPOrig = HP;
-        updatePlayerUI();
+        playerCam = GetComponentInChildren<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.white);
+        if (GetComponent<CharacterController>().enabled)
+        {
+            Movement();
 
-        //Movement();
-
-        //Sprint();
+            Sprint();
+        }
     }
 
     void Movement()
@@ -70,13 +61,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
         playerVel.y -= gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
-
-        shootTimer += Time.deltaTime;
-
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
-        {
-            Shoot();
-        }
     }
 
     void Jump()
@@ -98,48 +82,5 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             speed /= sprintMod;
         }
-    }
-
-    void Shoot()
-    {
-        shootTimer = 0;
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
-        {
-            Debug.Log(hit.collider.name);
-
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if (dmg != null)
-            {
-                dmg.TakeDamage(shootDamage);
-            }
-        }
-    }
-
-    public void TakeDamage(int amount)
-    {
-        HP -= amount;
-        updatePlayerUI();
-        StartCoroutine(flashDamageScreen());
-
-        if (HP <= 0)
-        {
-            // You Lose !
-            GameManager.instance.YouLose();
-        }
-    }
-
-    public void updatePlayerUI()
-    {
-        GameManager.instance.healthMeter.fillAmount = (float)HP / HPOrig;
-    }
-
-    IEnumerator flashDamageScreen()
-    {
-        GameManager.instance.playerDamageScreen.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        GameManager.instance.playerDamageScreen.SetActive(false);
     }
 }

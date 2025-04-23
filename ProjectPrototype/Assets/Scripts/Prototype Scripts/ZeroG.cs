@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ZeroG : MonoBehaviour, IDamage
 {
+    [SerializeField] Mesh sphereMesh;
+    [SerializeField] Mesh capsuleMesh;
+
     [Header("Player Stats")]
     [SerializeField] int HP;
     [SerializeField] int maxGoldCarry;
@@ -20,7 +23,7 @@ public class ZeroG : MonoBehaviour, IDamage
     [SerializeField] float ascendForce;
     [SerializeField] float maxSpeed;
 
-    private AudioSource thrusterAudio;
+    AudioSource thrusterAudio;
 
     // How fast the player can look around
     [Header("Look Settings")]
@@ -28,10 +31,11 @@ public class ZeroG : MonoBehaviour, IDamage
     [SerializeField] float mouseSmoothTime;
 
     // Private variables for internal use
-    private Rigidbody rb;
-    private Camera playerCam;
-    private Vector2 smoothMouseDelta;
-    private float verticalLookRotation;
+    Rigidbody rb;
+
+    Camera playerCam;
+    Vector2 smoothMouseDelta;
+    float verticalLookRotation;
 
     int HPOrig;
 
@@ -176,6 +180,26 @@ public class ZeroG : MonoBehaviour, IDamage
         GameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    public void PlayerGrav(bool gravActive)
+    {
+        GetComponent<CharacterController>().enabled = gravActive;
+        GetComponent<CapsuleCollider>().enabled = !gravActive;
+
+
+
+        if (gravActive)
+        {
+            GetComponent<MeshFilter>().mesh = capsuleMesh;
+            playerCam.transform.position += new Vector3(0, .5f, 0);
+        }
+        else if (!gravActive)
+        {
+            GetComponent<MeshFilter>().mesh = sphereMesh;
+            playerCam.transform.position -= new Vector3(0, 1, 0);
+        }
+
     }
 
 
