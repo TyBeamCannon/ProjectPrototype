@@ -53,18 +53,26 @@ public class ButtonFunctions : MonoBehaviour
     #endif
     }
 
-    public void PlayerUpgrade()
+    public void Player()
+    {
+        GameManager.instance.CloseMenu();
+        GameManager.instance.AddMenuToList(GameManager.instance.MenuPlayerUpgrade);
+    }
+
+    public void PlayerSpeed()
     {
 
     }
 
-    public void MiningUpgrade()
+    public void Mining()
     {
-
+        GameManager.instance.CloseMenu();
+        GameManager.instance.AddMenuToList(GameManager.instance.MenuMiningUpgrade);
     }
 
-    public void WeaponUpgrade()
+    public void Weapon()
     {
-
+        GameManager.instance.CloseMenu();
+        GameManager.instance.AddMenuToList(GameManager.instance.MenuWeaponUpgrade);
     }
 }

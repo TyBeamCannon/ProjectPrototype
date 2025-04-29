@@ -1,17 +1,19 @@
 using System.Collections;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
 
 public class ZeroG : MonoBehaviour, IDamage
 {
     [SerializeField] Mesh sphereMesh;
     [SerializeField] Mesh capsuleMesh;
+    [SerializeField] LayerMask ignoreLayer;
 
     [Header("Player Stats")]
     [SerializeField] int HP;
     [SerializeField] int maxGoldCarry;
     [SerializeField] int maxCrystalCarry;
+    [SerializeField] float interactRange;
 
     int goldAmount;
     int crystalAmount;
@@ -73,10 +75,15 @@ public class ZeroG : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactRange, Color.white);
+
         if (controller.enabled)
         {
-            GravMovement();
-            HandleMouseLook();
+            if (!GameManager.instance.IsPaused)
+            {
+                GravMovement();
+                HandleMouseLook();
+            }
         }
         else
         {
@@ -96,6 +103,15 @@ public class ZeroG : MonoBehaviour, IDamage
             }
         }
         
+        if (Input.GetButtonDown("Use"))
+        {
+            Debug.Log("Use button pressed");
+            if (!GameManager.instance.isPaused)
+            {
+                Debug.Log("Game not paused");
+                Interact();
+            }
+        }
         
     }
 
@@ -267,9 +283,26 @@ public class ZeroG : MonoBehaviour, IDamage
 
     }
 
+    void Interact()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, interactRange, ~ignoreLayer))
+        {
+            Debug.Log(hit.collider.name);
+            IInteract interacted = hit.collider.GetComponent<IInteract>();
 
-    public int MaxGoldCarry { get { return maxGoldCarry; } } 
+            if (interacted != null)
+            {
+                Debug.Log("Interactable Hit");
+                interacted.Interact();
+            }
+
+        }
+    }
+
+
+    public int MaxGoldCarry { get { return maxGoldCarry; } set { maxGoldCarry = value;  } } 
     public int Gold { get { return goldAmount; } set { goldAmount = value; } }
-    public int MaxCrystalCarry { get { return maxCrystalCarry; } }
+    public int MaxCrystalCarry { get { return maxCrystalCarry; } set { maxCrystalCarry = value; } }
     public int Crystal {  get { return crystalAmount; } set { crystalAmount = value; } }
 }

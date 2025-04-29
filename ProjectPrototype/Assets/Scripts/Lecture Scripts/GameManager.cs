@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuVideo;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject menuUpgradeShop;
+    [SerializeField] GameObject menuPlayerUpgrade;
+    [SerializeField] GameObject menuMiningUpgrade;
+    [SerializeField] GameObject menuWeaponUpgrade;
     [SerializeField] TMP_Text gameGoalCountText;
 
     public GameObject playerDamageScreen;
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     [Header("---- Player ----")]
     public GameObject player;
     public ZeroG playerScript;
+    [SerializeField] GameObject reticle;
 
     int maxGoldPlayerCarry;
     int maxCrystalPlayerCarry;
@@ -116,6 +119,7 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
+        reticle.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         AddMenuToList(menu);
     }
@@ -125,6 +129,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
+        reticle.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         CloseMenu();
@@ -172,7 +177,9 @@ public class GameManager : MonoBehaviour
     public GameObject MenuVideo { get { return menuVideo; } }
     public GameObject MenuWin { get { return menuWin; } }
     public GameObject MenuLose { get { return menuLose; } }
-    public GameObject MenuUpgradeShop { get { return menuUpgradeShop; } }
+    public GameObject MenuPlayerUpgrade { get { return menuPlayerUpgrade; } }
+    public GameObject MenuMiningUpgrade {  get { return menuMiningUpgrade; } }
+    public GameObject MenuWeaponUpgrade { get { return menuWeaponUpgrade; } }
 
 
 

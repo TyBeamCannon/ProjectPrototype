@@ -12,7 +12,7 @@ public class MineTool : MonoBehaviour
     [SerializeField] float damagePerSecond;
     [SerializeField] LayerMask miningLayer;
 
-    IMine currentTarget = null;
+    IMine currentTarget;
     bool isMining = false;
 
     [Header("Weapon Settings")]
@@ -60,31 +60,32 @@ public class MineTool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!GameManager.instance.IsPaused) {
         // If the player is holding down the right mouse button, then isAiming is true
         isAiming = Input.GetMouseButton(1);
 
-        if(isAiming)
-        {
-            StopLaser();
+            if (isAiming)
+            {
+                StopLaser();
 
-            if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
-            {
-                nextFireTime = Time.time + fireRate;
-                FireProjectile();
-            }
-        }
-        else
-        {
-            if(Input.GetMouseButton(0))
-            {
-                isMining = true;
-                TryMine();
+                if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+                {
+                    nextFireTime = Time.time + fireRate;
+                    FireProjectile();
+                }
             }
             else
             {
-                isMining = false;
-                StopLaser();
+                if (Input.GetMouseButton(0))
+                {
+                    isMining = true;
+                    TryMine();
+                }
+                else
+                {
+                    isMining = false;
+                    StopLaser();
+                }
             }
         }
 
