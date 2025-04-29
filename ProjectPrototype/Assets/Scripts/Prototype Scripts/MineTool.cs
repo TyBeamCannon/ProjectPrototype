@@ -6,7 +6,7 @@ public class MineTool : MonoBehaviour
 
     [Header("Mine Settings")]
     [SerializeField] float miningRange;
-    [SerializeField] KeyCode mineKey = KeyCode.Mouse0;
+    int miningStrength;
     [SerializeField] Transform laserOrigin;
     [SerializeField] LineRenderer laserLine;
     [SerializeField] float damagePerSecond;
@@ -53,6 +53,7 @@ public class MineTool : MonoBehaviour
     
     void Start()
     {
+        miningStrength = 1;
         pingAudioSource = GetComponent<AudioSource>();
     }
 

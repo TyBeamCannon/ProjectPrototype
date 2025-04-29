@@ -11584,6 +11584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6834123594914464121}
+  - component: {fileID: 3975750926573747361}
   - component: {fileID: 506766423005938746}
   - component: {fileID: 1157657466419084775}
   - component: {fileID: 5592268753359227856}
@@ -11609,6 +11610,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6506159506401568614}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
+--- !u!114 &3975750926573747361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670213612215781419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4260499f247bfaf448d05c85e870a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  playerSpeedMultiplier: 1.2
+  psmMaxUpgradeAmount: 3
+  pingCooldownDivider: 0.33
+  pcdmMaxUpgradeAmount: 5
+  miningSpeedMultiplier: 1.25
+  msmMaxUpgradeAmount: 3
+  miningStrengthIncreaseBy: 0
+  msMaxUpgradeAmount: 1
+  weaponDamageMultiplier: 1.33
+  wdmMaxUpgradeAmount: 3
+  weaponShootRateMultiplier: 1.15
+  wsrmMaxUpgradeAmount: 3
+  weaponRangeMultiplier: 1.33
+  wrmMaxUpgradeAmount: 2
 --- !u!33 &506766423005938746
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -2,17 +2,23 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [Header("---- Menus ----")]
+    [SerializeField] List<GameObject> menuList;
     [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuGeneral;
+    [SerializeField] GameObject menuAudio;
+    [SerializeField] GameObject menuVideo;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject menuSettings;
+    [SerializeField] GameObject menuUpgradeShop;
     [SerializeField] TMP_Text gameGoalCountText;
 
     public GameObject playerDamageScreen;
@@ -65,17 +71,17 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (menuActive == null)
+            if (menuList.Count == 0)
             {
-                StatePause(menuPause);
+                StatePause(menuGeneral);
             }
-            else if (menuActive == menuPause)
+            else if (menuList.Count > 1)
+            {
+                CloseMenu();
+            }
+            else if (menuList.Count == 1)
             {
                 StateUnpause();
-            }
-            else if(menuActive == menuSettings)
-            {
-                SwapSettingsScreen();
             }
 
         }
@@ -84,14 +90,34 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void StatePause(GameObject menuToActivate)
+    public void AddMenuToList(GameObject menuToAdd)
+    {
+        menuList.Add(menuToAdd);
+        if (menuActive != null && menuActive.activeSelf)
+            menuActive.SetActive(false);
+        menuActive = menuList[menuList.Count - 1];
+        menuActive.SetActive(true);
+    }
+
+    public void CloseMenu()
+    {
+        menuActive.SetActive(false);
+        menuActive = null;
+        menuList.RemoveAt(menuList.Count - 1);
+        if (menuList.Count > 0)
+        {
+            menuActive = menuList[menuList.Count - 1];
+            menuActive.SetActive(true);
+        }
+    }
+
+    public void StatePause(GameObject menu)
     {
         isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        menuActive = menuToActivate;
-        menuActive.SetActive(true);
+        AddMenuToList(menu);
     }
 
     public void StateUnpause()
@@ -101,7 +127,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
-        menuActive = null;
+        CloseMenu();
     }
 
     public void UpdateCrystalCount(int amount)
@@ -141,27 +167,14 @@ public class GameManager : MonoBehaviour
         StatePause(menuLose);
     }
 
-    public void SwapSettingsScreen()
-    {
-        if (menuActive == menuPause)
-        {
-            menuActive.SetActive(false);
-            menuActive = null;
-            menuActive = menuSettings;
-            menuActive.SetActive(true);
-        }
-        else if (menuActive == menuSettings)
-        {
-            menuActive.SetActive(false);
-            menuActive = null;
-            menuActive = menuPause;
-            menuActive.SetActive(true);
-        }
-    }
+    public GameObject MenuGeneral { get { return menuGeneral; } }
+    public GameObject MenuAudio { get { return menuAudio; } }
+    public GameObject MenuVideo { get { return menuVideo; } }
+    public GameObject MenuWin { get { return menuWin; } }
+    public GameObject MenuLose { get { return menuLose; } }
+    public GameObject MenuUpgradeShop { get { return menuUpgradeShop; } }
 
-    
 
-    
 
     public bool IsPaused { get { return isPaused; } }
 }

@@ -76,7 +76,7 @@ public class ZeroG : MonoBehaviour, IDamage
         if (controller.enabled)
         {
             GravMovement();
-                HandleMouseLook();
+            HandleMouseLook();
         }
         else
         {
