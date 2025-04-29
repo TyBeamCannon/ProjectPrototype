@@ -5460,9 +5460,9 @@ GameObject:
   - component: {fileID: 3545053632368717348}
   - component: {fileID: 4665127770152698003}
   - component: {fileID: 6210236164965392012}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door Trigger
-  m_TagString: Untagged
+  m_TagString: DoorTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

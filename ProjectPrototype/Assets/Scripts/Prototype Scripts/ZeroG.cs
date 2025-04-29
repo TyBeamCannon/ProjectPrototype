@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class ZeroG : MonoBehaviour, IDamage
 {
@@ -14,6 +15,20 @@ public class ZeroG : MonoBehaviour, IDamage
 
     int goldAmount;
     int crystalAmount;
+
+    [Header("---- Grav Player Stats ----")]
+
+    [SerializeField] CharacterController controller;
+    [SerializeField] int speed;
+    [SerializeField] int sprintMod;
+    [SerializeField] int jumpSpeed;
+    [SerializeField] int jumpMax;
+    [SerializeField] int gravity;
+
+    Vector3 moveDir;
+    Vector3 playerVel;
+
+    int jumpCount;
 
 
     // This controls the players speed in the Zero G environment
@@ -58,16 +73,26 @@ public class ZeroG : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.isPaused)
+        if (controller.enabled)
         {
-            thrusterAudio.Stop();
+            GravMovement();
+                HandleMouseLook();
         }
-        else {
-            HandleMouseLook();
+        else
+        {
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (GameManager.instance.isPaused)
             {
-                Stabilize();
+                thrusterAudio.Stop();
+            }
+            else
+            {
+                HandleMouseLook();
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Stabilize();
+                }
             }
         }
         
@@ -76,6 +101,7 @@ public class ZeroG : MonoBehaviour, IDamage
 
     void FixedUpdate()
     {
+        
         HandleMovement();
 
 
@@ -148,11 +174,9 @@ public class ZeroG : MonoBehaviour, IDamage
         transform.eulerAngles = flatRotation;
 
         // Re-center camera vertical look
-        verticalLookRotation = 0f;
-        playerCam.transform.localEulerAngles = Vector3.zero;
+        //verticalLookRotation = 0f;
+        //playerCam.transform.localEulerAngles = Vector3.zero;
 
-        // Restablize camera if offset
-        GameObject.FindWithTag("Player").transform.rotation = new Quaternion(0f,0f, 0f, 0f);
 
 
     }
@@ -169,7 +193,47 @@ public class ZeroG : MonoBehaviour, IDamage
             GameManager.instance.YouLose();
         }
     }
+    void GravMovement()
+    {
+        if (controller.isGrounded)
+        {
+            jumpCount = 0;
+        }
 
+        moveDir = (Input.GetAxis("Horizontal") * transform.right) +
+                  (Input.GetAxis("Vertical") * transform.forward);
+
+
+        //transform.position += moveDir * speed * Time.deltaTime;
+
+        controller.Move(moveDir * speed * Time.deltaTime);
+
+        GravJump();
+
+        playerVel.y -= gravity * Time.deltaTime;
+        controller.Move(playerVel * Time.deltaTime);
+    }
+
+    void GravJump()
+    {
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        {
+            jumpCount++;
+            playerVel.y = jumpSpeed;
+        }
+    }
+
+    void GravSprint()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
+            speed *= sprintMod;
+        }
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            speed /= sprintMod;
+        }
+    }
     public void updatePlayerUI()
     {
         GameManager.instance.healthMeter.fillAmount = (float)HP / HPOrig;
@@ -184,20 +248,21 @@ public class ZeroG : MonoBehaviour, IDamage
 
     public void PlayerGrav(bool gravActive)
     {
-        GetComponent<CharacterController>().enabled = gravActive;
-        GetComponent<CapsuleCollider>().enabled = !gravActive;
+        controller.enabled = gravActive;
 
 
 
         if (gravActive)
         {
+            Stabilize();
             GetComponent<MeshFilter>().mesh = capsuleMesh;
             playerCam.transform.position += new Vector3(0, .5f, 0);
         }
         else if (!gravActive)
         {
+            playerVel.y = 0;
             GetComponent<MeshFilter>().mesh = sphereMesh;
-            playerCam.transform.position -= new Vector3(0, 1, 0);
+            playerCam.transform.position -= new Vector3(0, .5f, 0);
         }
 
     }

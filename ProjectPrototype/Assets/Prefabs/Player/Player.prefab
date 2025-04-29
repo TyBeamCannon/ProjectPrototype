@@ -5303,7 +5303,6 @@ GameObject:
   - component: {fileID: 150397383093977183}
   - component: {fileID: 1086299343586678366}
   - component: {fileID: 7931805070190771914}
-  - component: {fileID: 436317202245064128}
   - component: {fileID: 2354666048125690938}
   - component: {fileID: 7884726333681398332}
   - component: {fileID: 4046185954432051681}
@@ -5387,27 +5386,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &436317202245064128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8529666890998899616}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23cad896b53c47a478f8469cccfd3d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  controller: {fileID: 4046185954432051681}
-  speed: 3
-  sprintMod: 1
-  jumpSpeed: 6
-  jumpMax: 1
-  gravity: 15
 --- !u!114 &2354666048125690938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5425,6 +5403,12 @@ MonoBehaviour:
   HP: 10
   maxGoldCarry: 10
   maxCrystalCarry: 10
+  controller: {fileID: 4046185954432051681}
+  speed: 2
+  sprintMod: 1
+  jumpSpeed: 12
+  jumpMax: 1
+  gravity: 20
   thrustForce: 2
   strafeForce: 2
   ascendForce: 2

@@ -8,6 +8,7 @@ TagManager:
   - PostProcess
   - Mineable
   - SSC
+  - DoorTrigger
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Enemy Bullet
   - Traps
   - Mine
-  - 
+  - Door Trigger
   - 
   - PostProcessing
   - 
