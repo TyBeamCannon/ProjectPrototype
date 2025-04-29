@@ -5827,7 +5827,7 @@ Transform:
   m_GameObject: {fileID: 2909898706819192248}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -2.2, y: 0, z: 25.5}
+  m_LocalPosition: {x: -0.7180171, y: 0, z: 34.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11625,18 +11625,33 @@ MonoBehaviour:
   type: 0
   playerSpeedMultiplier: 1.2
   psmMaxUpgradeAmount: 3
+  psmCost: 0
+  playerMaxGoldCarryMultiplier: 0
+  pmgcmMaxUpgradeAmount: 0
+  pmgcmCost: 0
+  playerMaxCrystalCarryMultiplier: 0
+  pmccmMaxUpgradeAmount: 0
+  pmccmCost: 0
   pingCooldownDivider: 0.33
-  pcdmMaxUpgradeAmount: 5
+  pcdMaxUpgradeAmount: 0
+  pcdCost: 0
   miningSpeedMultiplier: 1.25
   msmMaxUpgradeAmount: 3
+  msmCost: 0
   miningStrengthIncreaseBy: 0
+  msibMaxUpgradeAmount: 0
+  msibCost: 0
   msMaxUpgradeAmount: 1
+  msCost: 0
   weaponDamageMultiplier: 1.33
   wdmMaxUpgradeAmount: 3
+  wdmCost: 0
   weaponShootRateMultiplier: 1.15
   wsrmMaxUpgradeAmount: 3
+  wsrmCost: 0
   weaponRangeMultiplier: 1.33
   wrmMaxUpgradeAmount: 2
+  wrmCost: 0
 --- !u!33 &506766423005938746
 MeshFilter:
   m_ObjectHideFlags: 0
