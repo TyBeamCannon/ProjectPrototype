@@ -4,6 +4,9 @@ public class MineTool : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    public GameObject toolModelSpace;
+    public GameObject toolModelGrav;
+
     [Header("Mine Settings")]
     [SerializeField] float miningRange;
     int miningStrength;
@@ -46,6 +49,12 @@ public class MineTool : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera playerCam;
 
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audMine;
+    [Range(0, 1)][SerializeField] float audMineVol;
+    [SerializeField] AudioClip[] audShoot;
+    [Range(0, 1)][SerializeField] float audShootVol;
+
 
 
     // Bools
@@ -68,7 +77,7 @@ public class MineTool : MonoBehaviour
             {
                 StopLaser();
 
-                if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+                if (Input.GetMouseButton(0) && Time.time >= nextFireTime && toolModelSpace.GetComponent<MeshFilter>().sharedMesh != null)
                 {
                     nextFireTime = Time.time + fireRate;
                     FireProjectile();
@@ -76,15 +85,19 @@ public class MineTool : MonoBehaviour
             }
             else
             {
-                if (Input.GetMouseButton(0))
+                if (!GetComponentInParent<ZeroG>().controller.enabled && toolModelSpace.GetComponent<MeshFilter>().sharedMesh != null)
                 {
-                    isMining = true;
-                    TryMine();
-                }
-                else
-                {
-                    isMining = false;
-                    StopLaser();
+                    if (Input.GetMouseButton(0))
+                    {
+                        isMining = true;
+                        TryMine();
+                    }
+                    else
+                    {
+                        aud.Stop();
+                        isMining = false;
+                        StopLaser();
+                    }
                 }
             }
         }
@@ -113,8 +126,6 @@ public class MineTool : MonoBehaviour
     {
         Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
 
-        laserLine.enabled = true;
-        laserLine.SetPosition(0, laserOrigin.position);
 
         if(Physics.Raycast(ray, out RaycastHit hit, miningRange, miningLayer))
         {
@@ -130,6 +141,8 @@ public class MineTool : MonoBehaviour
             currentTarget = hit.collider.GetComponent<IMine>();
             if(currentTarget != null)
             {
+                laserLine.enabled = true;
+                laserLine.SetPosition(0, laserOrigin.position);
                 currentTarget.Mine(Mathf.RoundToInt(damagePerSecond * Time.deltaTime));
 
                 miningDamageBuffer += damagePerSecond * Time.deltaTime;
@@ -139,6 +152,8 @@ public class MineTool : MonoBehaviour
                     int damageToApply = Mathf.FloorToInt(miningDamageBuffer);
                     currentTarget.Mine(damageToApply);
                     miningDamageBuffer -= damageToApply;
+
+                    aud.PlayOneShot(audMine[Random.Range(0, audMine.Length)], audMineVol);
                 }
 
 
@@ -154,7 +169,9 @@ public class MineTool : MonoBehaviour
     void FireProjectile()
     {
 
-        if( playerCam == null)
+        aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
+
+        if ( playerCam == null)
         {
             Debug.LogWarning("Player camera not assigned!");
             return;
@@ -184,6 +201,8 @@ public class MineTool : MonoBehaviour
         laserLine.enabled = false;
         currentTarget = null;
     }
+
+    
 
     public float PingCooldown { get { return pingCooldown; } set { pingCooldown = value; } }
 

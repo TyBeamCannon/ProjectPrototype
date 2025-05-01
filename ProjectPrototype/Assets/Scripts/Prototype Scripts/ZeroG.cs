@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
-public class ZeroG : MonoBehaviour, IDamage
+public class ZeroG : MonoBehaviour, IDamage, IPickup
 {
+
+    [SerializeField] public MineTool mineTool;
     [SerializeField] Mesh sphereMesh;
     [SerializeField] Mesh capsuleMesh;
     [SerializeField] LayerMask ignoreLayer;
@@ -20,7 +22,7 @@ public class ZeroG : MonoBehaviour, IDamage
 
     [Header("---- Grav Player Stats ----")]
 
-    [SerializeField] CharacterController controller;
+    [SerializeField] public CharacterController controller;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
     [SerializeField] int jumpSpeed;
@@ -46,6 +48,19 @@ public class ZeroG : MonoBehaviour, IDamage
     [Header("Look Settings")]
     [SerializeField] float lookSensitivity;
     [SerializeField] float mouseSmoothTime;
+
+    [Header("Audio")]
+
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+
+    bool isPlayingSteps;
+    bool isSprinting;
 
     // Private variables for internal use
     Rigidbody rb;
@@ -123,7 +138,7 @@ public class ZeroG : MonoBehaviour, IDamage
 
         bool isThrusting = Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0 || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftControl);
 
-        if (isThrusting)
+        if (!controller.enabled && isThrusting)
         {
             if(!thrusterAudio.isPlaying)
             {
@@ -202,6 +217,7 @@ public class ZeroG : MonoBehaviour, IDamage
         HP -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamageScreen());
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
 
         if (HP <= 0)
         {
@@ -209,11 +225,34 @@ public class ZeroG : MonoBehaviour, IDamage
             GameManager.instance.YouLose();
         }
     }
+    public void GetToolStats(MineNWeapon tool)
+    {
+        mineTool.toolModelGrav.GetComponent<MeshFilter>().sharedMesh = tool.model.GetComponent<MeshFilter>().sharedMesh;
+        mineTool.toolModelGrav.GetComponent<MeshRenderer>().sharedMaterial = tool.model.GetComponent<MeshRenderer>().sharedMaterial;
+        mineTool.toolModelSpace.GetComponent<MeshFilter>().sharedMesh = tool.model.GetComponent<MeshFilter>().sharedMesh;
+        mineTool.toolModelSpace.GetComponent<MeshRenderer>().sharedMaterial = tool.model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+    IEnumerator playSteps()
+    {
+        isPlayingSteps = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.5f);
+        else
+            yield return new WaitForSeconds(0.3f);
+        isPlayingSteps = false;
+
+    }
+
     void GravMovement()
     {
         if (controller.isGrounded)
         {
+            if (moveDir.magnitude > 0.3f && !isPlayingSteps)
+                StartCoroutine(playSteps());
+
             jumpCount = 0;
+            playerVel = Vector3.zero;
         }
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
@@ -236,6 +275,7 @@ public class ZeroG : MonoBehaviour, IDamage
         {
             jumpCount++;
             playerVel.y = jumpSpeed;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
@@ -243,10 +283,12 @@ public class ZeroG : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Sprint"))
         {
+            isSprinting = true;
             speed *= sprintMod;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
+            isSprinting = false;
             speed /= sprintMod;
         }
     }
@@ -272,6 +314,7 @@ public class ZeroG : MonoBehaviour, IDamage
         {
             Stabilize();
             GetComponent<MeshFilter>().mesh = capsuleMesh;
+            
             playerCam.transform.position += new Vector3(0, .5f, 0);
         }
         else if (!gravActive)

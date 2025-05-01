@@ -10,6 +10,8 @@ TagManager:
   - SSC
   - DoorTrigger
   - Shop
+  - SpaceModel
+  - GravModel
   layers:
   - Default
   - TransparentFX

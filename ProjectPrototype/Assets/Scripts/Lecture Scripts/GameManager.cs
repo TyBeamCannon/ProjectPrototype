@@ -35,10 +35,14 @@ public class GameManager : MonoBehaviour
     [Header("---- Player ----")]
     public GameObject player;
     public ZeroG playerScript;
+    MineTool playerMineTool;
     [SerializeField] GameObject reticle;
 
     [SerializeField] TMP_Text goldCount;
     [SerializeField] TMP_Text crystalCount;
+
+    [SerializeField] GameObject spaceModel;
+    [SerializeField] GameObject gravModel;
 
     int maxGoldPlayerCarry;
     int maxCrystalPlayerCarry;
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<ZeroG>();
+        playerMineTool = playerScript.mineTool;
 
         GameObject.FindWithTag("PostProcess").GetComponent<PostProcessVolume>().profile.GetSetting<Grain>().intensity.value = Camera.main.GetComponent<AudioSource>().volume = 0.01f;
         
@@ -75,6 +80,10 @@ public class GameManager : MonoBehaviour
 
         maxGoldPlayerCarry = playerScript.MaxGoldCarry;
         maxCrystalPlayerCarry = playerScript.MaxCrystalCarry;
+        
+
+        spaceModel = playerMineTool.toolModelSpace;
+        gravModel = playerMineTool.toolModelGrav;
     }
 
     // Update is called once per frame
@@ -212,6 +221,9 @@ public class GameManager : MonoBehaviour
     public GameObject MenuPlayerUpgrade { get { return menuPlayerUpgrade; } }
     public GameObject MenuMiningUpgrade {  get { return menuMiningUpgrade; } }
     public GameObject MenuWeaponUpgrade { get { return menuWeaponUpgrade; } }
+
+    public bool SpaceModel {  get { return spaceModel.active; } set { spaceModel.SetActive(value); } }
+    public bool GravModel { get { return gravModel.active; } set { gravModel.SetActive(value); } }
 
 
     public bool IsPaused { get { return isPaused; } }

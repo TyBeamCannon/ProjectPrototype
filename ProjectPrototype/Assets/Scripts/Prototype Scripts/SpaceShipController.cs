@@ -22,5 +22,7 @@ public class SpaceShipController : MonoBehaviour
     public void OnPlayerGravTrigger(bool isTriggered)
     {
         GameManager.instance.playerScript.PlayerGrav(isTriggered);
+        GameManager.instance.GravModel = isTriggered;
+        GameManager.instance.SpaceModel = !isTriggered;
     }
 }
