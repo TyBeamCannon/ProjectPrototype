@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     public ZeroG playerScript;
     [SerializeField] GameObject reticle;
 
+    [SerializeField] TMP_Text goldCount;
+    [SerializeField] TMP_Text crystalCount;
+
     int maxGoldPlayerCarry;
     int maxCrystalPlayerCarry;
 
@@ -157,6 +160,7 @@ public class GameManager : MonoBehaviour
         //crystalDisplayFillAmount = Mathf.Lerp(crystalDisplayFillAmount, (float)playerScript.Crystal / playerScript.MaxCrystalCarry, Time.deltaTime * crystalDisplaySpeed);
         //crystalMeter.fillAmount = crystalDisplayFillAmount;
 
+        crystalCount.text = playerScript.Crystal.ToString();
         crystalMeter.fillAmount = (float)playerScript.Crystal / maxCrystalPlayerCarry;
 
         if (playerScript.Crystal >= maxCrystalGoal)
@@ -174,6 +178,7 @@ public class GameManager : MonoBehaviour
 
         if (goldMeter != null && maxGoldPlayerCarry > 0)
         {
+            goldCount.text = playerScript.Gold.ToString();
             goldMeter.fillAmount = (float)playerScript.Gold / maxGoldPlayerCarry;
         }
     }

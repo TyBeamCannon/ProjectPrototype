@@ -5163,7 +5163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miningRange: 20
-  mineKey: 323
   laserOrigin: {fileID: 7501184674667088484}
   laserLine: {fileID: 8055025140082309939}
   damagePerSecond: 2
@@ -5400,9 +5399,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   capsuleMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 8
   HP: 10
   maxGoldCarry: 10
   maxCrystalCarry: 10
+  interactRange: 3
   controller: {fileID: 4046185954432051681}
   speed: 2
   sprintMod: 1
@@ -5425,7 +5428,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

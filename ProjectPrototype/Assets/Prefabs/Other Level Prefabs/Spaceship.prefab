@@ -11590,7 +11590,7 @@ GameObject:
   - component: {fileID: 5592268753359227856}
   m_Layer: 0
   m_Name: Upgrade Module
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11622,36 +11622,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4260499f247bfaf448d05c85e870a11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   playerSpeedMultiplier: 1.2
   psmMaxUpgradeAmount: 3
-  psmCost: 0
-  playerMaxGoldCarryMultiplier: 0
-  pmgcmMaxUpgradeAmount: 0
-  pmgcmCost: 0
-  playerMaxCrystalCarryMultiplier: 0
-  pmccmMaxUpgradeAmount: 0
-  pmccmCost: 0
-  pingCooldownDivider: 0.33
-  pcdMaxUpgradeAmount: 0
-  pcdCost: 0
+  psmCost: 2
+  playerMaxGoldCarryMultiplier: 2
+  pmgcmMaxUpgradeAmount: 4
+  pmgcmCost: 3
+  playerMaxCrystalCarryMultiplier: 2
+  pmccmMaxUpgradeAmount: 4
+  pmccmCost: 3
+  pingCooldownDivider: 1.33
+  pcdMaxUpgradeAmount: 5
+  pcdCost: 5
   miningSpeedMultiplier: 1.25
   msmMaxUpgradeAmount: 3
-  msmCost: 0
-  miningStrengthIncreaseBy: 0
-  msibMaxUpgradeAmount: 0
-  msibCost: 0
-  msMaxUpgradeAmount: 1
-  msCost: 0
-  weaponDamageMultiplier: 1.33
+  msmCost: 5
+  miningStrengthIncreaseBy: 1
+  msibMaxUpgradeAmount: 1
+  msibCost: 20
+  weaponDamageMultiplier: 3
   wdmMaxUpgradeAmount: 3
-  wdmCost: 0
+  wdmCost: 10
   weaponShootRateMultiplier: 1.15
   wsrmMaxUpgradeAmount: 3
-  wsrmCost: 0
+  wsrmCost: 15
   weaponRangeMultiplier: 1.33
   wrmMaxUpgradeAmount: 2
-  wrmCost: 0
+  wrmCost: 10
 --- !u!33 &506766423005938746
 MeshFilter:
   m_ObjectHideFlags: 0

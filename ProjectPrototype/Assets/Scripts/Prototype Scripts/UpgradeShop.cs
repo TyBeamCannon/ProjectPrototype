@@ -99,7 +99,7 @@ public class UpgradeShop : MonoBehaviour, IInteract
     public int WSRMCurrUpgradeCount { get { return wsrmCurrUpgradeCount; } set {  wsrmCurrUpgradeCount = value; } }
     public int WSRMCost { get {return wsrmCost; } set { wsrmCost = value; } }
     public float WeaponRangeMultiplier { get { return weaponRangeMultiplier; } }
-    public int WRMMaxUpgradeAmount { get { return wrmMaxUpgradeAmount; } }
-    public int WRMCurrUpgradeCount { get { return wsrmCurrUpgradeCount; } set { wsrmCurrUpgradeCount = value; } }
+    public int WRMMaxUpgradeAmount { get { return wrmMaxUpgradeAmount; } }  
+    public int WRMCurrUpgradeCount { get { return wrmCurrUpgradeCount; } set { wrmCurrUpgradeCount = value; } }
     public int WRMCost { get { return wrmCost; } set { wrmCost = value; } }
 }

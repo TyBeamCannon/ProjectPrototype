@@ -96,7 +96,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         if((shop.PMGCMCurrUpgradeCount < shop.PMGCMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.PMGCMCost))
         {
-            GameManager.instance.playerScript.MaxGoldCarry += shop.PlayerMaxGoldCarryMultiplier;
+            GameManager.instance.playerScript.MaxGoldCarry *= shop.PlayerMaxGoldCarryMultiplier;
             shop.PMGCMCurrUpgradeCount++;
             shop.PMGCMCost *= shopCostMulti;
             GameManager.instance.UpdateMaxCarryCount();
@@ -106,7 +106,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.PMGCMCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -116,6 +116,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         if ((shop.PMCCMCurrUpgradeCount < shop.PMCCMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.PMCCMCost))
         {
+            GameManager.instance.playerScript.MaxCrystalCarry *= shop.PlayerMaxCrystalCarryMultiplier;
             shop.PMCCMCurrUpgradeCount++;
             shop.PMCCMCost *= shopCostMulti;
             GameManager.instance.UpdateMaxCarryCount();
@@ -125,7 +126,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.PMCCMCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -144,7 +145,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.PCDCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -169,7 +170,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.MSMCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -188,7 +189,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.MSIBCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -213,7 +214,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.WDMCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -232,7 +233,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.WSRMCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }
@@ -251,7 +252,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             StartCoroutine(GameManager.instance.MaxUpgrades());
         }
-        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        else if (GameManager.instance.playerScript.Gold < shop.WRMCost)
         {
             StartCoroutine(GameManager.instance.NotEnoughGold());
         }

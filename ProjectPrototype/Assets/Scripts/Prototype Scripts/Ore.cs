@@ -9,15 +9,22 @@ public class Ore : MonoBehaviour, IMine
     public void Mine(int damage)
     {
         int actualDamage = Mathf.Min(damage, oreAmount);
-        oreAmount -= actualDamage;
 
         switch (type)
         {
             case OreType.Crystal:
-                GameManager.instance.UpdateCrystalCount(actualDamage);
+                if (GameManager.instance.playerScript.Crystal < GameManager.instance.playerScript.MaxCrystalCarry)
+                {
+                    oreAmount -= actualDamage;
+                    GameManager.instance.UpdateCrystalCount(actualDamage);
+                }
                 break;
             case OreType.Gold:
-                GameManager.instance.UpdateGoldCount(actualDamage);
+                if (GameManager.instance.playerScript.Gold < GameManager.instance.playerScript.MaxGoldCarry)
+                {
+                    oreAmount -= actualDamage;
+                    GameManager.instance.UpdateGoldCount(actualDamage);
+                }
                 break;
         }
 
