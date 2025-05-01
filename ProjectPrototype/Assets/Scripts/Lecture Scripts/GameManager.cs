@@ -5,6 +5,7 @@ using TMPro;
 using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPlayerUpgrade;
     [SerializeField] GameObject menuMiningUpgrade;
     [SerializeField] GameObject menuWeaponUpgrade;
+
+
     [SerializeField] TMP_Text gameGoalCountText;
+    [SerializeField] GameObject maxUpgradesReached;
+    [SerializeField] GameObject notEnoughGold;
 
     public GameObject playerDamageScreen;
 
@@ -135,6 +140,12 @@ public class GameManager : MonoBehaviour
         CloseMenu();
     }
 
+    public void UpdateMaxCarryCount()
+    {
+        maxCrystalPlayerCarry = playerScript.MaxCrystalCarry;
+        maxGoldPlayerCarry = playerScript.MaxGoldCarry;
+    }
+
     public void UpdateCrystalCount(int amount)
     {
         playerScript.Crystal += amount;
@@ -172,6 +183,22 @@ public class GameManager : MonoBehaviour
         StatePause(menuLose);
     }
 
+
+    public IEnumerator MaxUpgrades()
+    {
+        maxUpgradesReached.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.2f);
+        maxUpgradesReached.SetActive(false);
+    }
+
+    public IEnumerator NotEnoughGold()
+    {
+        notEnoughGold.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.2f);
+        notEnoughGold.SetActive(false);
+    }
+
+
     public GameObject MenuGeneral { get { return menuGeneral; } }
     public GameObject MenuAudio { get { return menuAudio; } }
     public GameObject MenuVideo { get { return menuVideo; } }
@@ -180,7 +207,6 @@ public class GameManager : MonoBehaviour
     public GameObject MenuPlayerUpgrade { get { return menuPlayerUpgrade; } }
     public GameObject MenuMiningUpgrade {  get { return menuMiningUpgrade; } }
     public GameObject MenuWeaponUpgrade { get { return menuWeaponUpgrade; } }
-
 
 
     public bool IsPaused { get { return isPaused; } }

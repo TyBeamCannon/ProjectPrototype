@@ -22,7 +22,7 @@ public class MineTool : MonoBehaviour
     [SerializeField] float fireRange;
     [SerializeField] int damage;
     [SerializeField] GameObject hitFX;
-    [SerializeField] float fireRate = 0.1f;
+    [SerializeField] float fireRate;
 
     float nextFireTime = 0f;
     float miningDamageBuffer = 0f;
@@ -38,7 +38,7 @@ public class MineTool : MonoBehaviour
     [SerializeField] GameObject pingPulsePrefab;
     [SerializeField] Transform pingOrigin;
     [SerializeField] AudioClip pingSound;
-    [SerializeField] float pingCooldown = 3f;
+    [SerializeField] float pingCooldown;
 
     float pingTimer = 0f;
     AudioSource pingAudioSource;
@@ -184,4 +184,13 @@ public class MineTool : MonoBehaviour
         laserLine.enabled = false;
         currentTarget = null;
     }
+
+    public float PingCooldown { get { return pingCooldown; } set { pingCooldown = value; } }
+
+    public float MiningSpeed { get { return damagePerSecond; } set { damagePerSecond = value; } }
+    public int MiningStrength { get { return miningStrength; } set { miningStrength = value; } }
+
+    public int WeaponDamage { get { return damage; } set { damage = value; } }
+    public float ShootRate { get { return fireRate; } set { fireRate = value; } }
+    public float Range { get { return fireRange; } set { fireRange = value; } }
 }

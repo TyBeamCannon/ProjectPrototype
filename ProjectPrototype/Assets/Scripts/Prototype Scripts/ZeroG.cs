@@ -300,7 +300,7 @@ public class ZeroG : MonoBehaviour, IDamage
         }
     }
 
-
+    public float PlayerSpeed { get { return thrustForce; } set { strafeForce = value; thrustForce = value; ascendForce = value; } }
     public int MaxGoldCarry { get { return maxGoldCarry; } set { maxGoldCarry = value;  } } 
     public int Gold { get { return goldAmount; } set { goldAmount = value; } }
     public int MaxCrystalCarry { get { return maxCrystalCarry; } set { maxCrystalCarry = value; } }

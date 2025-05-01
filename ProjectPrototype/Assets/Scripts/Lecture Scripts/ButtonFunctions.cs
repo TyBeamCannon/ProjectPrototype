@@ -1,9 +1,21 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    UpgradeShop shop;
+    int shopCostMulti;
+
+    void Start()
+    {
+        shop = GameObject.FindWithTag("Shop").GetComponent<UpgradeShop>();
+        shopCostMulti = 2;
+
+    }
+
+
     public void Resume()
     {
         GameManager.instance.StateUnpause();
@@ -61,7 +73,81 @@ public class ButtonFunctions : MonoBehaviour
 
     public void PlayerSpeed()
     {
+        if ((shop.PSMCurrUpgradeCount < shop.PSMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.PSMCost))
+        {
+            GameManager.instance.UpdateGoldCount(-shop.PSMCost);
+            GameManager.instance.playerScript.PlayerSpeed *= shop.PlayerSpeedMultiplier;
+            shop.PSMCurrUpgradeCount++;
+            shop.PSMCost *= shopCostMulti;
+        }
+        else if (shop.PSMCurrUpgradeCount >= shop.PSMMaxUpgradeAmount)
+        {
+            Debug.Log("Max Upgrades");
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            Debug.Log("No Gold");
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    }
 
+    public void PlayerMaxGold()
+    {
+        if((shop.PMGCMCurrUpgradeCount < shop.PMGCMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.PMGCMCost))
+        {
+            GameManager.instance.playerScript.MaxGoldCarry += shop.PlayerMaxGoldCarryMultiplier;
+            shop.PMGCMCurrUpgradeCount++;
+            shop.PMGCMCost *= shopCostMulti;
+            GameManager.instance.UpdateMaxCarryCount();
+            GameManager.instance.UpdateGoldCount(-shop.PMGCMCost);
+        }
+        else if (shop.PMGCMCurrUpgradeCount >= shop.PMGCMMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    }
+
+    public void PlayerMaxCrystal()
+    {
+        if ((shop.PMCCMCurrUpgradeCount < shop.PMCCMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.PMCCMCost))
+        {
+            shop.PMCCMCurrUpgradeCount++;
+            shop.PMCCMCost *= shopCostMulti;
+            GameManager.instance.UpdateMaxCarryCount();
+            GameManager.instance.UpdateGoldCount(-shop.PMCCMCost);
+        }
+        else if (shop.PMCCMCurrUpgradeCount >= shop.PMCCMMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    } 
+
+    public void PlayerPingCooldown()
+    {
+        if ((shop.PCDCurrUpgradeCount < shop.PCDMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.PCDCost))
+        {
+            shop.PCDCurrUpgradeCount++;
+            shop.PCDCost *= shopCostMulti;
+            GameManager.instance.player.GetComponent<MineTool>().PingCooldown /= shop.PingCooldownDivider;
+            GameManager.instance.UpdateGoldCount(-shop.PCDCost);
+        }
+        else if (shop.PCDCurrUpgradeCount >= shop.PCDMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
     }
 
     public void Mining()
@@ -70,9 +156,104 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.AddMenuToList(GameManager.instance.MenuMiningUpgrade);
     }
 
+    public void MiningSpeed()
+    {
+        if ((shop.MSMCurrUpgradeCount < shop.MSMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.MSMCost))
+        {
+            shop.MSMCurrUpgradeCount++;
+            shop.MSMCost *= shopCostMulti;
+            GameManager.instance.player.GetComponent<MineTool>().MiningSpeed *= shop.MiningSpeedMultiplier;
+            GameManager.instance.UpdateGoldCount(-shop.MSMCost);
+        }
+        else if (shop.MSMCurrUpgradeCount >= shop.MSMMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    }
+
+    public void MiningStrength()
+    {
+        if((shop.MSIBCurrUpgradeCount < shop.MSIBMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.MSIBCost))
+        {
+            shop.MSIBCurrUpgradeCount++;
+            shop.MSIBCost *= shopCostMulti;
+            GameManager.instance.player.GetComponent<MineTool>().MiningStrength++;
+            GameManager.instance.UpdateGoldCount(-shop.MSIBCost);
+        }
+        else if (shop.MSIBCurrUpgradeCount >= shop.MSIBMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    }
+
     public void Weapon()
     {
         GameManager.instance.CloseMenu();
         GameManager.instance.AddMenuToList(GameManager.instance.MenuWeaponUpgrade);
+    }
+
+    public void WeaponDamage()
+    {
+        if ((shop.WDMCurrUpgradeCount < shop.WDMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.WDMCost))
+        {
+            shop.WDMCurrUpgradeCount++;
+            shop.WDMCost *= shopCostMulti;
+            GameManager.instance.player.GetComponent<MineTool>().WeaponDamage += shop.WeaponDamageMultiplier;
+            GameManager.instance.UpdateGoldCount(-shop.WDMCost);
+        }
+        else if (shop.WDMCurrUpgradeCount >= shop.WDMMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    }
+
+    public void WeaponShootRate()
+    {
+        if ((shop.WSRMCurrUpgradeCount < shop.WSRMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.WSRMCost))
+        {
+            shop.WSRMCurrUpgradeCount++;
+            shop.WSRMCost *= shopCostMulti;
+            GameManager.instance.player.GetComponent<MineTool>().ShootRate *= shop.WeaponShootRateMultiplier;
+            GameManager.instance.UpdateGoldCount(-shop.WSRMCost);
+        }
+        else if (shop.WSRMCurrUpgradeCount >= shop.WSRMMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
+    }
+
+    public void WeaponRange()
+    {
+        if((shop.WRMCurrUpgradeCount < shop.WRMMaxUpgradeAmount) && (GameManager.instance.playerScript.Gold >= shop.WRMCost))
+        {
+            shop.WRMCurrUpgradeCount++;
+            shop.WRMCost *= shopCostMulti;
+            GameManager.instance.player.GetComponent<MineTool>().Range *= shop.WeaponRangeMultiplier;
+            GameManager.instance.UpdateGoldCount(-shop.WRMCost);
+        }
+        else if (shop.WRMCurrUpgradeCount >= shop.WRMMaxUpgradeAmount)
+        {
+            StartCoroutine(GameManager.instance.MaxUpgrades());
+        }
+        else if (GameManager.instance.playerScript.Gold < shop.PSMCost)
+        {
+            StartCoroutine(GameManager.instance.NotEnoughGold());
+        }
     }
 }
